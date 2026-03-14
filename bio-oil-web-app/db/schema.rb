@@ -10,5 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 0) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_14_140422) do
+  create_table "distributors", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "currency"
+    t.string "name"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.datetime "updated_at", null: false
+    t.string "volume"
+  end
+
+  create_table "skus", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "distributor_id", null: false
+    t.decimal "price_per_unit"
+    t.integer "product_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["distributor_id"], name: "index_skus_on_distributor_id"
+    t.index ["product_id"], name: "index_skus_on_product_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "distributor_id"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at"
+    t.string "reset_password_token"
+    t.integer "role"
+    t.datetime "updated_at", null: false
+    t.index ["distributor_id"], name: "index_users_on_distributor_id"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  add_foreign_key "skus", "distributors"
+  add_foreign_key "skus", "products"
 end
