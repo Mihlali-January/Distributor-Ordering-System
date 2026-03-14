@@ -2,14 +2,20 @@ class Order < ApplicationRecord
   belongs_to :distributor
   belongs_to :user
   has_many :order_items, dependent: :destroy
+  accepts_nested_attributes_for :order_items, allow_destroy: true
 
   validates :order_number, presence: true, uniqueness: true
   validates :required_delivery_date, presence: true
   validate :required_delivery_date_cannot_be_in_the_past
 
   before_validation :generate_order_number, on: :create
+  before_save :calculate_total_cost
 
   private
+
+  def calculate_total_cost
+    self.total_cost = order_items.map(&:cost).sum
+  end
 
   def required_delivery_date_cannot_be_in_the_past
     if required_delivery_date.present? && required_delivery_date < Date.today

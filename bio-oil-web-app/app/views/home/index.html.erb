@@ -1,4 +1,11 @@
-<h1>Home#index</h1>
-<p>Hi This is our homepage, Find it in app/views/home/index.html.erb</p>
-
-<p>If you can see this, then our server is running!</p>
+<div class="container mt-5 text-center">
+  <h1 class="display-4 fw-bold">Union Swiss Ordering System</h1>
+  <p class="lead text-muted">A dedicated portal for global distribution management.</p>
+  <div class="mt-4">
+    <% if user_signed_in? %>
+      <%= link_to "Go to Dashboard", user_root_path, class: "btn btn-primary px-4" %>
+    <% else %>
+      <%= link_to "Sign In to Get Started", new_user_session_path, class: "btn btn-primary px-4" %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h1 class="mb-0">Your Orders</h1>
+      <div class="text-muted small">Logged in as <%= current_user.email %></div>
+    </div>
+    <div class="d-flex gap-2">
+      <%= link_to "Sign Out", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-danger" %>
+      <%= link_to "Place New Order", new_order_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+
+  <div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+      <table class="table table-hover mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Order #</th>
+            <th>Placed On</th>
+            <th>Required Delivery</th>
+            <th>Total Cost</th>
+            <th class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td class="align-middle fw-bold"><%= order.order_number %></td>
+              <td class="align-middle text-muted"><%= order.created_at.strftime("%d %b %Y") %></td>
+              <td class="align-middle"><%= order.required_delivery_date.strftime("%d %b %Y") %></td>
+              <td class="align-middle fw-medium text-success">
+                <%= number_to_currency(order.total_cost, unit: order.distributor.currency + " ") %>
+              </td>
+              <td class="text-end align-middle">
+                <%= link_to "View Details", order_path(order), class: "btn btn-sm btn-outline-primary" %>
+              </td>
+            </tr>
+          <% end %>
+
+          <% if @orders.empty? %>
+            <tr>
+              <td colspan="5" class="text-center py-5">
+                <div class="text-muted mb-3">No orders placed yet.</div>
+                <%= link_to "Start your first order", new_order_path, class: "btn btn-outline-primary btn-sm" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
