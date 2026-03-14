@@ -10,12 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_14_140422) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_14_144131) do
   create_table "distributors", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "currency"
     t.string "name"
     t.datetime "updated_at", null: false
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.decimal "cost"
+    t.datetime "created_at", null: false
+    t.integer "order_id", null: false
+    t.integer "pallets"
+    t.integer "sku_id", null: false
+    t.integer "units"
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["sku_id"], name: "index_order_items_on_sku_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "distributor_id", null: false
+    t.string "order_number"
+    t.date "required_delivery_date"
+    t.decimal "total_cost"
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["distributor_id"], name: "index_orders_on_distributor_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -50,6 +74,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_14_140422) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "skus"
+  add_foreign_key "orders", "distributors"
+  add_foreign_key "orders", "users"
   add_foreign_key "skus", "distributors"
   add_foreign_key "skus", "products"
 end
