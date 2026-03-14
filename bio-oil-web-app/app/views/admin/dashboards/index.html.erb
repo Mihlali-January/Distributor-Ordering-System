@@ -1,0 +1,8 @@
+<div class="container mt-5">
+  <h1>Admin Dashboard</h1>
+<p>Welcome, <%= current_user.email %>. This is the Admin area.</p>
+
+<p><%= link_to "Manage Distributors", admin_distributors_path %></p>
+<p><%= link_to "Manage Products", admin_products_path %></p>
+<p><%= button_to "Sign Out", destroy_user_session_path, method: :delete %></p>
+</div>

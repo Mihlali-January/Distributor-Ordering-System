@@ -1,0 +1,20 @@
+<h1>Distributors</h1>
+<%= link_to "Back to Dashboard", admin_root_path %> | <%= link_to "Add Distributor", new_admin_distributor_path %>
+
+<table border="1">
+  <tr>
+    <th>Name</th>
+    <th>Currency</th>
+    <th>Actions</th>
+  </tr>
+  <% @distributors.each do |distributor| %>
+    <tr>
+      <td><%= distributor.name %></td>
+      <td><%= distributor.currency %></td>
+      <td>
+        <%= link_to "SKUs", admin_distributor_skus_path(distributor) %> |
+        <%= link_to "Edit", edit_admin_distributor_path(distributor) %>
+      </td>
+    </tr>
+  <% end %>
+</table>
