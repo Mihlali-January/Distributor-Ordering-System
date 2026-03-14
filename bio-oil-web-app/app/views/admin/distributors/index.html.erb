@@ -1,20 +1,45 @@
-<h1>Distributors</h1>
-<%= link_to "Back to Dashboard", admin_root_path %> | <%= link_to "Add Distributor", new_admin_distributor_path %>
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <%= link_to "&larr; Back to Dashboard".html_safe, admin_root_path, class: "text-decoration-none text-muted mb-2 d-block" %>
+      <h1>Distributors</h1>
+    </div>
+    <%= link_to "Add New Distributor", new_admin_distributor_path, class: "btn btn-success" %>
+  </div>
 
-<table border="1">
-  <tr>
-    <th>Name</th>
-    <th>Currency</th>
-    <th>Actions</th>
-  </tr>
-  <% @distributors.each do |distributor| %>
-    <tr>
-      <td><%= distributor.name %></td>
-      <td><%= distributor.currency %></td>
-      <td>
-        <%= link_to "SKUs", admin_distributor_skus_path(distributor) %> |
-        <%= link_to "Edit", edit_admin_distributor_path(distributor) %>
-      </td>
-    </tr>
-  <% end %>
-</table>
+  <div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+      <table class="table table-hover mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Name</th>
+            <th>Currency</th>
+            <th>Users</th>
+            <th>SKUs</th>
+            <th class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @distributors.each do |distributor| %>
+            <tr>
+              <td class="align-middle fw-medium"><%= distributor.name %></td>
+              <td class="align-middle"><span class="badge bg-secondary"><%= distributor.currency %></span></td>
+              <td class="align-middle"><%= distributor.users.count %></td>
+              <td class="align-middle"><%= distributor.skus.count %></td>
+              <td class="text-end align-middle">
+                <%= link_to "Manage SKUs", admin_distributor_skus_path(distributor), class: "btn btn-sm btn-outline-primary" %>
+                <%= link_to "Edit", edit_admin_distributor_path(distributor), class: "btn btn-sm btn-outline-secondary ms-1" %>
+              </td>
+            </tr>
+          <% end %>
+          
+          <% if @distributors.empty? %>
+            <tr>
+              <td colspan="5" class="text-center py-4 text-muted">No distributors found.</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
