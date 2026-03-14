@@ -1,18 +1,24 @@
 require "test_helper"
 
 class Admin::SkusControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    sign_in users(:admin_user)
+    @distributor = distributors(:one)
+    @sku = skus(:one)
+  end
+
   test "should get index" do
-    get admin_skus_index_url
+    get admin_distributor_skus_url(@distributor)
     assert_response :success
   end
 
   test "should get new" do
-    get admin_skus_new_url
+    get new_admin_distributor_sku_url(@distributor)
     assert_response :success
   end
 
   test "should get edit" do
-    get admin_skus_edit_url
+    get edit_admin_distributor_sku_url(@distributor, @sku)
     assert_response :success
   end
 end

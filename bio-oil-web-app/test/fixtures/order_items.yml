@@ -3,13 +3,13 @@
 one:
   order: one
   sku: one
-  pallets: 1
-  units: 1
-  cost: 9.99
+  pallets: 100
+  units: 480000
+  cost: 480000.00
 
 two:
   order: two
   sku: two
-  pallets: 1
-  units: 1
-  cost: 9.99
+  pallets: 200
+  units: 960000
+  cost: 960000.00

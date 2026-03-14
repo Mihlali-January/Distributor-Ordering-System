@@ -1,0 +1,42 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <%= link_to "&larr; Back to Dashboard".html_safe, admin_root_path, class: "text-decoration-none text-muted mb-2 d-block" %>
+      <h1>Products Engine</h1>
+    </div>
+    <%= link_to "Add New Product", new_admin_product_path, class: "btn btn-success" %>
+  </div>
+
+  <div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+      <table class="table table-hover mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Product Name</th>
+            <th>Volume</th>
+            <th>Associated SKUs</th>
+            <th class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @products.each do |product| %>
+            <tr>
+              <td class="align-middle fw-medium"><%= product.name %></td>
+              <td class="align-middle"><%= product.volume %></td>
+              <td class="align-middle"><%= product.skus.count %> SKUs globally</td>
+              <td class="text-end align-middle">
+                <%= link_to "Edit", edit_admin_product_path(product), class: "btn btn-sm btn-outline-secondary ms-1" %>
+              </td>
+            </tr>
+          <% end %>
+          
+          <% if @products.empty? %>
+            <tr>
+              <td colspan="4" class="text-center py-4 text-muted">No products created yet.</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

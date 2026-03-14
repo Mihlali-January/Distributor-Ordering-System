@@ -1,0 +1,45 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <%= link_to "&larr; Back to Distributors".html_safe, admin_distributors_path, class: "text-decoration-none text-muted mb-2 d-block" %>
+      <h1>SKUs for <%= @distributor.name %></h1>
+      <p class="text-muted">Currency: <%= @distributor.currency %></p>
+    </div>
+    <%= link_to "Add SKU to Distributor", new_admin_distributor_sku_path(@distributor), class: "btn btn-success" %>
+  </div>
+
+  <div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+      <table class="table table-hover mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>SKU Code</th>
+            <th>Product</th>
+            <th>Volume</th>
+            <th>Price (<%= @distributor.currency %>)</th>
+            <th class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @skus.each do |sku| %>
+            <tr>
+              <td class="align-middle fw-bold text-primary"><%= sku.sku_code %></td>
+              <td class="align-middle fw-medium"><%= sku.product.name %></td>
+              <td class="align-middle"><%= sku.product.volume %></td>
+              <td class="align-middle"><%= number_to_currency(sku.price_per_unit, unit: @distributor.currency + " ") %></td>
+              <td class="text-end align-middle">
+                <%= link_to "Edit Price", edit_admin_distributor_sku_path(@distributor, sku), class: "btn btn-sm btn-outline-secondary" %>
+              </td>
+            </tr>
+          <% end %>
+          
+          <% if @skus.empty? %>
+            <tr>
+              <td colspan="4" class="text-center py-4 text-muted">No SKUs have been configured for this distributor yet.</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

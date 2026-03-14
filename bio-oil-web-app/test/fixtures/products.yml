@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  volume: MyString
+  name: Skincare Oil 60ml
+  volume: 60ml (2 oz)
 
 two:
-  name: MyString
-  volume: MyString
+  name: Skincare Oil 125ml
+  volume: 125ml (4.2 oz)
