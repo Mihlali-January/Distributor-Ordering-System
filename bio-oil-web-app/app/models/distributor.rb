@@ -12,6 +12,6 @@ class Distributor < ApplicationRecord
   scope :active, -> { where(active: true) }
 
   def display_name
-    "[#{distributor_code}] #{name}"
+    "#{name} [#{distributor_code}]"
   end
 end

@@ -4,7 +4,7 @@
   <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
       <%= link_to "&larr; Back to Distributors".html_safe, admin_distributors_path, class: "text-decoration-none text-muted mb-2 d-block small fw-bold text-uppercase tracking-widest" %>
-      <h1 class="mb-0 brand-title" style="font-size: 3rem;"><%= @distributor.name %></h1>
+      <h1 class="mb-0 brand-title"><%= @distributor.name %></h1>
       <div class="mt-2 d-flex align-items-center">
         <span class="text-muted small text-uppercase tracking-widest fw-bold me-2">Code:</span>
         <span class="badge bg-light text-brand border me-3 fw-bold"><%= @distributor.distributor_code %></span>

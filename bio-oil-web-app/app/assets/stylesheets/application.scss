@@ -18,9 +18,28 @@ $glass-blur: 15px;
 .tracking-widest { letter-spacing: 0.15em; }
 
 /* 2. Hero Component Styles */
+/* 2. Hero Component Styles */
+.brand-display-mega {
+  font-size: clamp(4rem, 10vw, 8rem);
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  font-weight: 700;
+}
+
 .brand-title {
-  font-size: 8rem;
+  font-size: 2.5rem;
   letter-spacing: -0.02em;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+/* Specific scaling for small headers using the brand-title class */
+h5.brand-title, .h5.brand-title {
+  font-size: 1.25rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #718096;
+  opacity: 0.8;
 }
 
 .thin-line {
