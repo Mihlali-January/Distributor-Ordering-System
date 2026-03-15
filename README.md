@@ -1,42 +1,83 @@
-# Distributor-Ordering-System
+# Bio-Oil Distributor Ordering System
+
 A web-based ordering system that allows distributors to place orders for Bio-Oil products and enables Union Swiss administrators to configure distributors and their pricing.
 
-# Setup Instructions:
-o Ruby/Rails version required: ruby 3.3.5 / Rails 8.1.2
-o How to install dependencies 
-o Database setup (creation, migrations, seeding)
-o Any environment variables or configuration needed
+## Setup Instructions
 
-# How to Run:
-o Command to start the application: 
-    From root navigate to bio-oil-web-app directory and run the following commands to start the web app:
-    
-    cd bio-oil-web-app
-    rails server
-    
-    The server will start and the website will run live on local host at http://127.0.0.1:3000
-    Use Ctrl-C to stop the application.
+- **Ruby/Rails version**: Ruby 3.3.5 / Rails 8.1.2
+- **Dependencies**: Run `bundle install` and `yarn install`
+- **Database**: Run `bin/rails db:prepare` (creates, migrates, and seeds)
+- **Environment**: Ensure logic for `Admin` console access is configured in development.
 
-o URL to access the application: http://127.0.0.1:3000
+## How to Run
 
-o Login credentials for test users (admin and distributor accounts)
+1. Navigate to the `bio-oil-web-app` directory:
 
-Admin:
-    username: adm1n
-    password: letsinnovate
+   ```run in wsl(ubuntu)
+   cd bio-oil-web-app
+   ```
 
-Distributer
-    username: distr0
-    password: letsinnovate
+2. Start the application:
 
+   ```run in wsl(ubuntu)
+   rails server
+   ```
 
-# Application Overview:
-o Brief description of the application structure TBD
-o Key features implemented
+3. Access the application at [http://127.0.0.1:3000](http://127.0.0.1:3000).
 
-# Additional Features (if any):
-o Automated tests (RSpec, Minitest, etc.)
-o Order Tracking/ Automated Emails
-o Payment Portal Integration
-o Delivery Portal Integration
+*Use `Ctrl + C` to stop the application.*
 
+## Useful Commands
+
+### Server & General
+
+- `rails server`: Starts the local development server.
+- `Ctrl + C`: Stops the running server.
+
+### CSS & Styling
+
+- `npm run build:css`: Compiles SCSS files and applies vendor prefixing. Run this if/when style changes aren't appearing.
+- `npm run watch:css`: Automatically rebuilds CSS whenever a `.scss` file is saved.
+
+### Database Management
+
+- `rails db:migrate`: Applies pending database schema changes.
+- `rails db:seed`: Loads initial data (Admin/Distributor accounts).
+- `rails db:reset`: Wipes the database and starts fresh (drop -> create -> migrate -> seed).
+- `rails db:migrate:status`: Verifies which migrations have been applied.
+
+## Login Credentials (Test Accounts)
+
+### Admin
+
+- **Username**: `admin@unionswiss.com`
+- **Password**: `headOffice1234`
+
+- **Username**: `craig@unionswiss.com`
+- **Password**: `Letsinnovate1234`
+
+### Distributor
+
+- **Username**: `distributor_sa@example.com`
+- **Password**: `distr0SA1234`
+
+- **Username**: `distributor_uk@example.com`
+- **Password**: `distr0UK1234`
+
+## Project Status & Roadmap
+
+### Key Features Implemented
+
+- [x] Premium Authentication UI (Glassmorphism & Branded photography)
+- [x] Secure Login/Password recovery (Paranoid Mode enabled)
+- [x] Admin-led User & Distributor creation
+- [x] Role-based access control (Admin vs. Distributor)
+
+### Future Features
+
+- [ ] Automated tests (RSpec/Minitest)
+- [ ] Order Management
+- [ ] Order Tracking/Automated Emails
+- [ ] Sales Order Generation
+- [ ] Payment Portal Integration
+- [ ] Delivery Portal Integration

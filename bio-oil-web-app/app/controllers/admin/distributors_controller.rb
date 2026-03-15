@@ -10,6 +10,7 @@ class Admin::DistributorsController < Admin::BaseController
 
   def new
     @distributor = Distributor.new
+    @distributor.users.build
   end
 
   def create
@@ -44,6 +45,6 @@ class Admin::DistributorsController < Admin::BaseController
   end
 
   def distributor_params
-    params.require(:distributor).permit(:name, :currency)
+    params.require(:distributor).permit(:name, :currency, users_attributes: [:email, :password, :password_confirmation, :role])
   end
 end

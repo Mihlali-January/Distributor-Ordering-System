@@ -1,0 +1,24 @@
+<div class="glass-card text-center">
+  <div class="mb-5">
+    <h6 class="text-brand tracking-widest uppercase mb-1">Recovery</h6>
+    <h1 class="h2 fw-light tracking-widest mb-0 uppercase text-brand">Reset Password</h1>
+    <p class="small text-muted tracking-widest uppercase">Bio-Oil Distributor Portal</p>
+  </div>
+
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "text-start", novalidate: true }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="mb-4">
+      <%= f.label :email, class: "form-label small text-brand tracking-widest uppercase fw-bold" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control-brand w-100", placeholder: "Enter your email" %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.submit "Send Instructions", class: "btn-brand w-100" %>
+    </div>
+  <% end %>
+
+  <div class="mt-4 border-top pt-4">
+    <%= render "devise/shared/links" %>
+  </div>
+</div>
