@@ -7,14 +7,23 @@ class Order < ApplicationRecord
   validates :order_number, presence: true, uniqueness: true
   validates :required_delivery_date, presence: true
   validate :required_delivery_date_cannot_be_in_the_past
+  validate :must_have_items
+
+  accepts_nested_attributes_for :order_items, 
+                                allow_destroy: true,
+                                reject_if: proc { |attributes| attributes['pallets'].to_i <= 0 }
 
   before_validation :generate_order_number, on: :create
   before_save :calculate_total_cost
 
   private
 
+  def must_have_items
+    errors.add(:base, "Order must contain at least one item with a quantity greater than zero") if order_items.empty? || order_items.all?(&:marked_for_destruction?)
+  end
+
   def calculate_total_cost
-    self.total_cost = order_items.map(&:cost).sum
+    self.total_cost = order_items.map { |i| i.cost || 0 }.sum
   end
 
   def required_delivery_date_cannot_be_in_the_past

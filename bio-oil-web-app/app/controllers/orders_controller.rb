@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
       end
     end
     
-    @order.total_cost = @order.order_items.map(&:cost).sum
+    @order.total_cost = @order.order_items.map { |i| i.cost || 0 }.sum
 
     if @order.save
       redirect_to @order, notice: "Order was successfully placed."
