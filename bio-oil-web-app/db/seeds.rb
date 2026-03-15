@@ -119,22 +119,22 @@ User.create!(
 
 puts "Creating SKUs..."
 # SA Pricing (ZAR)
-Sku.create!(product: prod_25ml, distributor: dist_sa, price_per_unit: 48.00)
-Sku.create!(product: prod_60ml, distributor: dist_sa, price_per_unit: 95.00)
-Sku.create!(product: prod_125ml, distributor: dist_sa, price_per_unit: 170.00)
-Sku.create!(product: prod_200ml, distributor: dist_sa, price_per_unit: 240.00)
+Sku.create!(product: prod_25ml, distributor: dist_sa, price_per_unit: 50.00)
+Sku.create!(product: prod_60ml, distributor: dist_sa, price_per_unit: 100.00)
+Sku.create!(product: prod_125ml, distributor: dist_sa, price_per_unit: 150.00)
+Sku.create!(product: prod_200ml, distributor: dist_sa, price_per_unit: 250.00)
 
 # UK Pricing (GBP)
-Sku.create!(product: prod_25ml, distributor: dist_uk, price_per_unit: 3.50)
-Sku.create!(product: prod_60ml, distributor: dist_uk, price_per_unit: 6.80)
-Sku.create!(product: prod_125ml, distributor: dist_uk, price_per_unit: 12.00)
-Sku.create!(product: prod_200ml, distributor: dist_uk, price_per_unit: 17.50)
+Sku.create!(product: prod_25ml, distributor: dist_uk, price_per_unit: 4.00)
+Sku.create!(product: prod_60ml, distributor: dist_uk, price_per_unit: 8.00)
+Sku.create!(product: prod_125ml, distributor: dist_uk, price_per_unit: 15.00)
+Sku.create!(product: prod_200ml, distributor: dist_uk, price_per_unit: 20.00)
 
 # Sweden Pricing (SEK)
-Sku.create!(product: prod_25ml, distributor: dist_se, price_per_unit: 45.00)
-Sku.create!(product: prod_60ml, distributor: dist_se, price_per_unit: 90.00)
-Sku.create!(product: prod_125ml, distributor: dist_se, price_per_unit: 160.00)
-Sku.create!(product: prod_200ml, distributor: dist_se, price_per_unit: 235.00)
+Sku.create!(product: prod_25ml, distributor: dist_se, price_per_unit: 50.00)
+Sku.create!(product: prod_60ml, distributor: dist_se, price_per_unit: 100.00)
+Sku.create!(product: prod_125ml, distributor: dist_se, price_per_unit: 150.00)
+Sku.create!(product: prod_200ml, distributor: dist_se, price_per_unit: 250.00)
 
 puts "Creating Mock Orders..."
 
@@ -144,8 +144,8 @@ order_sa = Order.create!(
   user: dist_sa.users.first,
   required_delivery_date: 2.weeks.from_now
 )
-order_sa.order_items.create!(sku: dist_sa.skus.find_by(product: prod_25ml), pallets: 30) # 144,000 units
-order_sa.order_items.create!(sku: dist_sa.skus.find_by(product: prod_200ml), pallets: 10) # 48,000 units
+order_sa.order_items.create!(sku: dist_sa.skus.find_by(product: prod_25ml), pallets: 30)
+order_sa.order_items.create!(sku: dist_sa.skus.find_by(product: prod_200ml), pallets: 10)
 order_sa.save!
 
 # UK ORDER 1
