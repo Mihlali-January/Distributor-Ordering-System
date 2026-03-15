@@ -1,10 +1,16 @@
 admin_user:
   email: admin_test@unionswiss.com
+  username: admintest
+  first_name: Admin
+  last_name: Test
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
   role: 0 # admin
 
 distributor_user:
   email: dist_test@unionswiss.com
+  username: disttest
+  first_name: Distributor
+  last_name: Test
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
   role: 1 # distributor
   distributor: one

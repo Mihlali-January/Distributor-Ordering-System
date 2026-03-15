@@ -11,9 +11,6 @@
 
     <%= yield :head %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
@@ -72,11 +69,11 @@
         <div class="sidebar-footer mt-auto pt-4 border-top">
           <div class="d-flex align-items-center mb-3">
             <div class="bg-brand text-white rounded-circle p-2 me-2" style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem;">
-              <%= current_user.first_name[0] %>
+              <%= current_user.first_name&.at(0) || current_user.email&.at(0)&.upcase || "U" %>
             </div>
             <div class="overflow-hidden">
-              <div class="fw-bold small text-truncate"><%= current_user.full_name %></div>
-              <div class="text-muted" style="font-size: 0.7rem;"><%= current_user.role.titleize %></div>
+              <div class="fw-bold small text-truncate"><%= current_user.full_name.presence || current_user.email %></div>
+              <div class="text-muted" style="font-size: 0.7rem;"><%= current_user.role&.titleize || "User" %></div>
             </div>
           </div>
           <%= button_to destroy_user_session_path, method: :delete, class: "nav-link w-100 border-0 bg-transparent text-danger p-2" do %>
