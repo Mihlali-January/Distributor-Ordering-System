@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :distributors do
       resources :skus, except: [:show, :destroy]
     end
+    resources :orders, only: [:index, :show]
   end
   
   resources :orders, only: [:index, :new, :create, :show]

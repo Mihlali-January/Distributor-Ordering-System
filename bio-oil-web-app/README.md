@@ -1,24 +1,74 @@
-# README
+# Bio-Oil Distributor Ordering System
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A web-based ordering system that allows distributors to place orders for Bio-Oil products and enables Union Swiss administrators to configure distributors and their pricing.
 
-Things you may want to cover:
+## Setup Instructions
 
-* Ruby version
+- **Ruby/Rails version**: Ruby 3.3.5 / Rails 8.1.2
+- **Dependencies**: Run `bundle install` and `yarn install`
+- **Database**: Run `bin/rails db:prepare` (creates, migrates, and seeds)
+- **Environment**: Ensure logic for `Admin` console access is configured in development.
 
-* System dependencies
+## How to Run
 
-* Configuration
+1. Navigate to the `bio-oil-web-app` directory:
 
-* Database creation
+   ```run in wsl(ubuntu)
+   cd bio-oil-web-app
+   ```
 
-* Database initialization
+2. Start the application:
 
-* How to run the test suite
+   ```run in wsl(ubuntu)
+   rails server
+   ```
 
-* Services (job queues, cache servers, search engines, etc.)
+3. Access the application at [http://127.0.0.1:3000](http://127.0.0.1:3000).
 
-* Deployment instructions
+*Use `Ctrl + C` to stop the application.*
 
-* ...
+## Useful Commands
+
+### Server & General
+
+- `rails server`: Starts the local development server.
+- `Ctrl + C`: Stops the running server.
+
+### CSS & Styling
+
+- `npm run build:css`: Compiles SCSS files and applies vendor prefixing. Run this if/when style changes aren't appearing.
+- `npm run watch:css`: Automatically rebuilds CSS whenever a `.scss` file is saved.
+
+### Database Management
+
+- `rails db:migrate`: Applies pending database schema changes.
+- `rails db:seed`: Loads initial data (Admin/Distributor accounts).
+- `rails db:reset`: Wipes the database and starts fresh (drop -> create -> migrate -> seed).
+- `rails db:migrate:status`: Verifies which migrations have been applied.
+
+## Login Credentials (Test Accounts)
+
+### Admin
+
+- **Username**: `admin@unionswiss.com`
+- **Password**: `headOffice1234`
+
+- **Username**: `craig@unionswiss.com`
+- **Password**: `Letsinnovate1234`
+
+### Distributor
+
+- **Username**: `distributor_sa@example.com`
+- **Password**: `distr0SA1234`
+
+- **Username**: `distributor_uk@example.com`
+- **Password**: `distr0UK1234`
+
+## Project Status & Roadmap
+
+### Key Features Implemented
+
+- [x] Premium Authentication UI (Glassmorphism & Branded photography)
+- [x] Secure Login/Password recovery (Paranoid Mode enabled)
+- [x] Admin-led User & Distributor creation
+- [x] Role-based access control (Admin vs. Distributor)

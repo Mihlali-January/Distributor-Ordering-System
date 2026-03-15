@@ -5,6 +5,8 @@ class OrdersController < ApplicationController
 
   def index
     @orders = current_user.distributor.orders.order(created_at: :desc)
+    @total_spent = @orders.sum(:total_cost)
+    @order_count = @orders.count
   end
 
   def show

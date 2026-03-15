@@ -1,0 +1,61 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h1 class="mb-0">Order <%= @order.order_number %></h1>
+      <p class="text-muted">Distributor: <%= @order.distributor.name %></p>
+    </div>
+    <%= link_to "Back to All Orders", admin_orders_path, class: "btn btn-outline-secondary" %>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-md-8">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-white fw-bold">Order Items</div>
+        <div class="card-body p-0">
+          <table class="table mb-0">
+            <thead class="table-light">
+              <tr>
+                <th>SKU / Product</th>
+                <th class="text-center">Pallets</th>
+                <th class="text-center">Units</th>
+                <th class="text-end">Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @order.order_items.each do |item| %>
+                <tr>
+                  <td>
+                    <strong><%= item.sku.product.name %></strong><br>
+                    <span class="text-muted small"><%= item.sku.sku_code %></span>
+                  </td>
+                  <td class="text-center"><%= item.pallets %></td>
+                  <td class="text-center"><%= number_with_delimiter(item.units) %></td>
+                  <td class="text-end fw-medium"><%= number_to_currency(item.cost, unit: @order.distributor.currency + " ") %></td>
+                </tr>
+              <% end %>
+            </tbody>
+            <tfoot class="table-light">
+              <tr>
+                <td colspan="3" class="text-end fw-bold text-uppercase">Grand Total</td>
+                <td class="text-end fw-bold text-success fs-5">
+                  <%= number_to_currency(@order.total_cost, unit: @order.distributor.currency + " ") %>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-white fw-bold">Order Details</div>
+        <div class="card-body">
+          <p class="mb-2"><strong>Placed By:</strong><br><%= @order.user.email %></p>
+          <p class="mb-2"><strong>Order Date:</strong><br><%= @order.created_at.strftime("%B %d, %Y at %H:%M") %></p>
+          <p class="mb-0"><strong>Required Delivery:</strong><br><%= @order.required_delivery_date.strftime("%B %d, %Y") %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

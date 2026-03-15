@@ -6,7 +6,29 @@
     </div>
     <div class="d-flex gap-2">
       <%= link_to "Sign Out", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-danger" %>
-      <%= link_to "Place New Order", new_order_path, class: "btn btn-primary" %>
+      <%= link_to "Place New Order", new_order_path, class: "btn btn-primary shadow-sm" %>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-4">
+    <div class="col-md-3">
+      <div class="card shadow-sm border-0 bg-primary text-white">
+        <div class="card-body">
+          <div class="small text-uppercase opacity-75 fw-bold mb-1">Total Orders</div>
+          <div class="h2 mb-0"><%= @order_count %></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="card shadow-sm border-0 bg-success text-white">
+        <div class="card-body">
+          <div class="small text-uppercase opacity-75 fw-bold mb-1">Total Spend</div>
+          <div class="h2 mb-0">
+            <%= number_to_currency(@total_spent, unit: current_user.distributor.currency + " ") %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
