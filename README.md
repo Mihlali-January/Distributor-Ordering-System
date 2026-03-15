@@ -12,7 +12,7 @@ o Command to start the application:
     From root navigate to bio-oil-web-app directory and run the following commands to start the web app:
     
     cd bio-oil-web-app
-    bin/dev
+    rails server
     
     The server will start and the website will run live on local host at http://127.0.0.1:3000
     Use Ctrl-C to stop the application.

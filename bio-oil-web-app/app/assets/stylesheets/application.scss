@@ -1,0 +1,58 @@
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons';
+
+/* 1. Global Brand Tokens */
+$brand-orange: #FF5100;
+
+.text-brand { color: $brand-orange !important; }
+.bg-brand { background-color: $brand-orange !important; }
+.border-top-brand { border-top: 1px solid $brand-orange; }
+
+.uppercase { text-transform: uppercase; }
+.tracking-widest { letter-spacing: 0.15em; }
+
+/* 2. Hero Component Styles */
+.brand-title {
+  font-size: 8rem;
+  letter-spacing: -0.02em;
+}
+
+.thin-line {
+  width: 60px;
+  height: 1px;
+  background-color: $brand-orange;
+  margin: 0 auto;
+}
+
+/* 3. Navigation Interactions */
+.nav-link-brand {
+  color: $brand-orange;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.8rem;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s;
+
+  &:hover {
+    border-bottom: 2px solid $brand-orange;
+  }
+}
+
+/* 4. Layout & Typography */
+.bio-oil-landing {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+  font-family: 'Inter', "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: $brand-orange;
+
+  .hero-section {
+    flex-grow: 1;
+    padding: 100px 0;
+  }
+}

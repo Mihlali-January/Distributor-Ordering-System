@@ -1,11 +1,51 @@
-<div class="container mt-5 text-center">
-  <h1 class="display-4 fw-bold">Union Swiss Ordering System</h1>
-  <p class="lead text-muted">A dedicated portal for global distribution management.</p>
-  <div class="mt-4">
-    <% if user_signed_in? %>
-      <%= link_to "Go to Dashboard", user_root_path, class: "btn btn-primary px-4" %>
-    <% else %>
-      <%= link_to "Sign In to Get Started", new_user_session_path, class: "btn btn-primary px-4" %>
-    <% end %>
+<div class="bio-oil-landing">
+  <div class="nav-container d-flex justify-content-between align-items-center p-4">
+    <div class="logo">
+      <h6>BRAND NAME</h6>
+      <h1 class="h2 fw-light tracking-widest mb-0 uppercase text-brand">Bio-Oil<span class="fw-bold">®</span></h1>
+      <p class="small text-brand tracking-widest mb-0">Distributor Ordering Portal</p>
+    </div>
+    
+    <div class="auth-links">
+      <% if user_signed_in? %>
+        <%= link_to "Go To Dashboard", user_root_path, class: "nav-link-brand" %>
+      <% else %>
+        <%= link_to "Login", new_user_session_path, class: "nav-link-brand" %>
+      <% end %>
+    </div>
   </div>
+
+  <div class="hero-section text-center d-flex flex-column justify-content-center align-items-center">
+    <div class="container py-5">
+      <h2 class="display-1 fw-light mb-4 text-brand brand-title">Seamless.</h2>
+      <h2 class="display-3 fw-light mb-5 text-brand">Global Distribution.</h2>
+      
+      <div class="thin-line mb-5"></div>
+      
+      <div class="row justify-content-center g-5">
+        <div class="col-md-4">
+          <h4 class="h6 fw-bold text-brand tracking-widest uppercase mb-3 text-start">ADMINISTRATION</h4>
+          <p class="small text-brand text-start">Configure distributors, set regional pricing, and manage the global product catalog.</p>
+          <div class="text-start mt-3">
+             <%= link_to "Enter Admin Console →", admin_root_path, class: "text-brand fw-bold text-decoration-none small" %>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <h4 class="h6 fw-bold text-brand tracking-widest uppercase mb-3 text-start">ORDERING</h4>
+          <p class="small text-brand text-start">Real-time pallet-to-unit calculations with multi-currency support for bulk logistics.</p>
+          <div class="text-start mt-3">
+             <%= link_to "Place Order →", new_order_path, class: "text-brand fw-bold text-decoration-none small" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="p-4 mt-auto border-top-brand">
+    <div class="container d-flex justify-content-between align-items-center">
+      <p class="small text-brand mb-0 text-uppercase tracking-widest">© <%= Time.now.year %> Union Swiss</p>
+      <div class="small text-brand text-uppercase tracking-widest">Privacy · Terms · Contact</div> 
+    </div>
+  </footer>
 </div>
