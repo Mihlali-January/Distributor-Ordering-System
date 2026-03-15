@@ -12,6 +12,7 @@
       <table class="table table-hover mb-0">
         <thead class="table-light">
           <tr>
+            <th>Code</th>
             <th>Name</th>
             <th>Currency</th>
             <th>Users</th>
@@ -22,6 +23,7 @@
         <tbody>
           <% @distributors.each do |distributor| %>
             <tr>
+              <td class="align-middle fw-bold"><%= distributor.distributor_code %></td>
               <td class="align-middle fw-medium"><%= distributor.name %></td>
               <td class="align-middle"><span class="badge bg-secondary"><%= distributor.currency %></span></td>
               <td class="align-middle"><%= distributor.users.count %></td>

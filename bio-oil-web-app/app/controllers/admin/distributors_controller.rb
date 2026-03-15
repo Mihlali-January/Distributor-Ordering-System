@@ -45,6 +45,10 @@ class Admin::DistributorsController < Admin::BaseController
   end
 
   def distributor_params
-    params.require(:distributor).permit(:name, :currency, users_attributes: [:email, :password, :password_confirmation, :role])
+    params.require(:distributor).permit(
+      :name, :distributor_code, :currency, :contact_name, :contact_email, 
+      :contact_phone, :address, :tax_number, :active,
+      users_attributes: [:id, :email, :username, :first_name, :last_name, :password, :password_confirmation, :role]
+    )
   end
 end

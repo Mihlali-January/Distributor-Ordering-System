@@ -10,12 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_14_144131) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_15_094949) do
   create_table "distributors", force: :cascade do |t|
+    t.boolean "active"
+    t.text "address"
+    t.string "contact_email"
+    t.string "contact_name"
+    t.string "contact_phone"
     t.datetime "created_at", null: false
     t.string "currency"
+    t.string "distributor_code"
     t.string "name"
+    t.string "tax_number"
     t.datetime "updated_at", null: false
+    t.index ["distributor_code"], name: "index_distributors_on_distributor_code"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -64,14 +72,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_14_144131) do
     t.integer "distributor_id"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.string "first_name"
+    t.string "last_name"
     t.datetime "remember_created_at"
     t.datetime "reset_password_sent_at"
     t.string "reset_password_token"
     t.integer "role"
     t.datetime "updated_at", null: false
+    t.string "username"
     t.index ["distributor_id"], name: "index_users_on_distributor_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["username"], name: "index_users_on_username"
   end
 
   add_foreign_key "order_items", "orders"

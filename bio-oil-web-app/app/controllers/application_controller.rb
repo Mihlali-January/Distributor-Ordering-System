@@ -6,8 +6,14 @@ class ApplicationController < ActionController::Base
   stale_when_importmap_changes
 
   layout :layout_by_resource
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   private
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:login])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:username, :first_name, :last_name])
+  end
 
   def layout_by_resource
     if devise_controller?

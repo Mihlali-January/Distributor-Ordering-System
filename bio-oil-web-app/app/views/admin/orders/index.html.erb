@@ -21,8 +21,8 @@
           <% @orders.each do |order| %>
             <tr>
               <td class="align-middle fw-bold"><%= order.order_number %></td>
-              <td class="align-middle"><%= order.distributor.name %></td>
-              <td class="align-middle small text-muted"><%= order.user.email %></td>
+              <td class="align-middle"><%= order.distributor.display_name %></td>
+              <td class="align-middle small text-muted"><%= order.user.full_name %></td>
               <td class="align-middle"><%= order.created_at.strftime("%d %b %Y") %></td>
               <td class="align-middle fw-medium">
                 <%= number_to_currency(order.total_cost, unit: order.distributor.currency + " ") %>

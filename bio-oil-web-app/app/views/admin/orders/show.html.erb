@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
       <h1 class="mb-0">Order <%= @order.order_number %></h1>
-      <p class="text-muted">Distributor: <%= @order.distributor.name %></p>
+      <p class="text-muted">Distributor: <%= @order.distributor.display_name %></p>
     </div>
     <%= link_to "Back to All Orders", admin_orders_path, class: "btn btn-outline-secondary" %>
   </div>
@@ -51,7 +51,7 @@
       <div class="card shadow-sm border-0 mb-4">
         <div class="card-header bg-white fw-bold">Order Details</div>
         <div class="card-body">
-          <p class="mb-2"><strong>Placed By:</strong><br><%= @order.user.email %></p>
+          <p class="mb-2"><strong>Placed By:</strong><br><%= @order.user.full_name %> (<%= @order.user.email %>)</p>
           <p class="mb-2"><strong>Order Date:</strong><br><%= @order.created_at.strftime("%B %d, %Y at %H:%M") %></p>
           <p class="mb-0"><strong>Required Delivery:</strong><br><%= @order.required_delivery_date.strftime("%B %d, %Y") %></p>
         </div>

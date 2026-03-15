@@ -1,2 +1,98 @@
-<h1>Admin::Distributors#show</h1>
-<p>Find me in app/views/admin/distributors/show.html.erb</p>
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <%= link_to "&larr; Back to Distributors".html_safe, admin_distributors_path, class: "text-decoration-none text-muted mb-2 d-block" %>
+      <h1 class="mb-0"><%= @distributor.name %></h1>
+      <span class="badge bg-secondary"><%= @distributor.distributor_code %></span>
+      <% if @distributor.active? %>
+        <span class="badge bg-success">Active</span>
+      <% else %>
+        <span class="badge bg-danger">Inactive</span>
+      <% end %>
+    </div>
+    <div>
+      <%= link_to "Edit Account", edit_admin_distributor_path(@distributor), class: "btn btn-outline-primary" %>
+      <%= link_to "Manage SKUs", admin_distributor_skus_path(@distributor), class: "btn btn-primary ms-2" %>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-md-7">
+      <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-white fw-bold">Company Logistics</div>
+        <div class="card-body">
+          <div class="row mb-3">
+            <div class="col-sm-4 text-muted small text-uppercase fw-bold">Address</div>
+            <div class="col-sm-8"><%= simple_format(@distributor.address) %></div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-sm-4 text-muted small text-uppercase fw-bold">Tax / VAT ID</div>
+            <div class="col-sm-8 fw-medium"><%= @distributor.tax_number || "Not specified" %></div>
+          </div>
+          <div class="row mb-0">
+            <div class="col-sm-4 text-muted small text-uppercase fw-bold">Base Currency</div>
+            <div class="col-sm-8 fw-medium"><%= @distributor.currency %></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-white fw-bold d-flex justify-content-between align-items-center">
+          <span>Users & Access</span>
+        </div>
+        <div class="card-body p-0">
+          <table class="table table-hover mb-0">
+            <thead class="table-light">
+              <tr>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @distributor.users.each do |user| %>
+                <tr>
+                  <td class="align-middle fw-medium"><%= user.full_name %></td>
+                  <td class="align-middle text-muted"><%= user.username %></td>
+                  <td class="align-middle"><%= user.email %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-5">
+      <div class="card shadow-sm border-0 border-start border-4 border-info mb-4">
+        <div class="card-header bg-white fw-bold">Primary Contact</div>
+        <div class="card-body">
+          <h5 class="mb-1"><%= @distributor.contact_name || "No contact name" %></h5>
+          <p class="text-muted small mb-3">Account Manager</p>
+          
+          <div class="d-flex align-items-center mb-2">
+            <i class="bi bi-envelope-fill me-2 text-primary"></i>
+            <%= mail_to @distributor.contact_email %>
+          </div>
+          <div class="d-flex align-items-center">
+            <i class="bi bi-telephone-fill me-2 text-primary"></i>
+            <span><%= @distributor.contact_phone || "No phone number" %></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-white fw-bold">Pricing Stats</div>
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="text-muted">Configured SKUs</span>
+            <span class="fw-bold"><%= @distributor.skus.count %></span>
+          </div>
+          <div class="d-grid mt-3">
+            <%= link_to "View Pricing Catalog", admin_distributor_skus_path(@distributor), class: "btn btn-sm btn-outline-info" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
