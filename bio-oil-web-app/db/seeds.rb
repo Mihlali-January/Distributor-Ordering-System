@@ -38,10 +38,11 @@ User.create!(
 )
 
 puts "Creating Products..."
-prod_25ml = Product.create!(name: "Skincare Oil 25ml", volume: "25ml (0.85 oz)")
-prod_60ml = Product.create!(name: "Skincare Oil 60ml", volume: "60ml (2 oz)")
-prod_125ml = Product.create!(name: "Skincare Oil 125ml", volume: "125ml (4.2 oz)")
-prod_200ml = Product.create!(name: "Skincare Oil 200ml", volume: "200ml (6.7 oz)")
+description = "Clinically proven scar and stretch mark oil."
+prod_25ml = Product.create!(name: "Skincare Oil 25ml", volume: "25ml (0.85 oz)", description: description)
+prod_60ml = Product.create!(name: "Skincare Oil 60ml", volume: "60ml (2 oz)", description: description)
+prod_125ml = Product.create!(name: "Skincare Oil 125ml", volume: "125ml (4.2 oz)", description: description)
+prod_200ml = Product.create!(name: "Skincare Oil 200ml", volume: "200ml (6.7 oz)", description: description)
 
 puts "Creating Distributors & Distributor Users..."
 

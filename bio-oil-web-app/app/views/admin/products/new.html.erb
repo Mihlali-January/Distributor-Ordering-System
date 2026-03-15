@@ -24,6 +24,12 @@
       <div class="form-text small mt-2">This will be the standard name derived by all global SKUs.</div>
     </div>
 
+    <div class="mb-4">
+      <%= f.label :description, "Product Description", class: "form-label fw-bold small text-uppercase tracking-widest text-muted" %>
+      <%= f.text_area :description, class: "form-control form-control-brand", rows: 4, placeholder: "Describe the product's benefits and features..." %>
+      <div class="form-text small mt-2">Will be displayed on the product catalog and portal.</div>
+    </div>
+
     <div class="mb-5">
       <%= f.label :volume, "Volume Specification", class: "form-label fw-bold small text-uppercase tracking-widest text-muted" %>
       <%= f.select :volume, Product::VALID_VOLUMES, { prompt: "Select a Product Volume" }, class: "form-select form-control-brand" %>

@@ -36,7 +36,7 @@
         <div class="row mb-4">
           <div class="col-sm-4 text-muted small text-uppercase tracking-widest fw-bold">Description</div>
           <div class="col-sm-8 text-muted italic">
-            High-performance skincare formulation. Designed for global distribution in accordance with regional compliance standards.
+            <%= @product.description.presence || "No description provided." %>
           </div>
         </div>
 
