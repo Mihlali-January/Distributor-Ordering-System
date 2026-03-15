@@ -6,7 +6,7 @@ A web-based ordering system that allows distributors to place orders for Bio-Oil
 
 - **Ruby/Rails version**: Ruby 3.3.6 / Rails 8.0.1
 - **Dependencies**: Run `bundle install` and `yarn install`
-- **Database**: Run `bin/rails db:prepare` (creates, migrates, and seeds)
+- **Database**: Run `bin/rails db:prepare` (creates, migrates, and seeds). For a clean rebuild, use `bin/rails db:reset`.
 - **Environment**: Ensure logic for `Admin` console access is configured in development.
 
 ## How to Run

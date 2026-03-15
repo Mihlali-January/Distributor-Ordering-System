@@ -1,4 +1,4 @@
-class AddDetailsToDistributors < ActiveRecord::Migration[8.1]
+class AddDetailsToDistributors < ActiveRecord::Migration[8.0]
   def change
     add_column :distributors, :distributor_code, :string
     add_index :distributors, :distributor_code

@@ -1,4 +1,4 @@
-class CreateSkus < ActiveRecord::Migration[8.1]
+class CreateSkus < ActiveRecord::Migration[8.0]
   def change
     create_table :skus do |t|
       t.references :product, null: false, foreign_key: true
