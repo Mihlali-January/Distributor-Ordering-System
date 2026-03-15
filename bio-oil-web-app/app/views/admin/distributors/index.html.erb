@@ -1,47 +1,46 @@
-<div class="container mt-5">
+<% content_for :title, "Distributors" %>
+
+<div style="max-width: 1200px;">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-      <%= link_to "&larr; Back to Dashboard".html_safe, admin_root_path, class: "text-decoration-none text-muted mb-2 d-block" %>
-      <h1>Distributors</h1>
+      <h1 class="brand-title mb-0" style="font-size: 2.5rem;">Distributors</h1>
     </div>
-    <%= link_to "Add New Distributor", new_admin_distributor_path, class: "btn btn-success" %>
+    <%= link_to "Add New Distributor", new_admin_distributor_path, class: "btn btn-brand" %>
   </div>
 
-  <div class="card shadow-sm border-0">
-    <div class="card-body p-0">
-      <table class="table table-hover mb-0">
-        <thead class="table-light">
+  <div class="table-clean shadow-sm">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Name</th>
+          <th class="text-center">Currency</th>
+          <th class="text-center">Users</th>
+          <th class="text-center">SKUs</th>
+          <th class="text-end">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @distributors.each do |distributor| %>
           <tr>
-            <th>Code</th>
-            <th>Name</th>
-            <th>Currency</th>
-            <th>Users</th>
-            <th>SKUs</th>
-            <th class="text-end">Actions</th>
+            <td class="fw-bold text-brand"><%= distributor.distributor_code %></td>
+            <td class="fw-bold"><%= distributor.name %></td>
+            <td class="text-center"><span class="badge bg-light text-muted border fw-bold"><%= distributor.currency %></span></td>
+            <td class="text-center"><%= distributor.users.count %></td>
+            <td class="text-center"><%= distributor.skus.count %></td>
+            <td class="text-end">
+              <%= link_to "Manage SKUs", admin_distributor_skus_path(distributor), class: "btn btn-sm btn-outline-dark px-3 rounded-pill" %>
+              <%= link_to "Edit", edit_admin_distributor_path(distributor), class: "btn btn-sm btn-outline-dark ms-1 rounded-pill px-3" %>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          <% @distributors.each do |distributor| %>
-            <tr>
-              <td class="align-middle fw-bold"><%= distributor.distributor_code %></td>
-              <td class="align-middle fw-medium"><%= distributor.name %></td>
-              <td class="align-middle"><span class="badge bg-secondary"><%= distributor.currency %></span></td>
-              <td class="align-middle"><%= distributor.users.count %></td>
-              <td class="align-middle"><%= distributor.skus.count %></td>
-              <td class="text-end align-middle">
-                <%= link_to "Manage SKUs", admin_distributor_skus_path(distributor), class: "btn btn-sm btn-outline-primary" %>
-                <%= link_to "Edit", edit_admin_distributor_path(distributor), class: "btn btn-sm btn-outline-secondary ms-1" %>
-              </td>
-            </tr>
-          <% end %>
-          
-          <% if @distributors.empty? %>
-            <tr>
-              <td colspan="5" class="text-center py-4 text-muted">No distributors found.</td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+        <% end %>
+        
+        <% if @distributors.empty? %>
+          <tr>
+            <td colspan="6" class="text-center py-5 text-muted">No distributors found.</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>

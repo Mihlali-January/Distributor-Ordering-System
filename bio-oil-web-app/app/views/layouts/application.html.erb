@@ -23,7 +23,81 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="<%= 'dashboard-layout' if user_signed_in? %>">
+    <% if user_signed_in? %>
+      <aside class="sidebar-brand">
+        <div class="sidebar-header">
+          <h4 class="text-brand fw-bold tracking-widest uppercase mb-0">Bio-Oil</h4>
+          <span class="small text-muted">Logistics Portal</span>
+        </div>
+
+        <nav class="flex-grow-1">
+          <div class="nav-item">
+            <% dashboard_path = current_user.admin? ? admin_root_path : orders_path %>
+            <%= link_to dashboard_path, class: "nav-link #{'active' if current_page?(dashboard_path)}" do %>
+              <i class="bi bi-grid-1x2-fill"></i> Dashboard
+            <% end %>
+          </div>
+
+          <% if current_user.admin? %>
+            <div class="nav-item">
+              <%= link_to admin_distributors_path, class: "nav-link #{'active' if params[:controller] == 'admin/distributors'}" do %>
+                <i class="bi bi-people-fill"></i> Distributors
+              <% end %>
+            </div>
+            <div class="nav-item">
+              <%= link_to admin_products_path, class: "nav-link #{'active' if params[:controller] == 'admin/products'}" do %>
+                <i class="bi bi-box-seam-fill"></i> Products
+              <% end %>
+            </div>
+            <div class="nav-item">
+              <%= link_to admin_orders_path, class: "nav-link #{'active' if params[:controller] == 'admin/orders'}" do %>
+                <i class="bi bi-cart-check-fill"></i> Global Orders
+              <% end %>
+            </div>
+          <% else %>
+            <div class="nav-item">
+              <%= link_to orders_path, class: "nav-link #{'active' if current_page?(orders_path)}" do %>
+                <i class="bi bi-cart-fill"></i> My Orders
+              <% end %>
+            </div>
+            <div class="nav-item">
+              <%= link_to new_order_path, class: "nav-link #{'active' if current_page?(new_order_path)}" do %>
+                <i class="bi bi-plus-circle-fill"></i> Place Order
+              <% end %>
+            </div>
+          <% end %>
+        </nav>
+
+        <div class="sidebar-footer mt-auto pt-4 border-top">
+          <div class="d-flex align-items-center mb-3">
+            <div class="bg-brand text-white rounded-circle p-2 me-2" style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem;">
+              <%= current_user.first_name[0] %>
+            </div>
+            <div class="overflow-hidden">
+              <div class="fw-bold small text-truncate"><%= current_user.full_name %></div>
+              <div class="text-muted" style="font-size: 0.7rem;"><%= current_user.role.titleize %></div>
+            </div>
+          </div>
+          <%= button_to destroy_user_session_path, method: :delete, class: "nav-link w-100 border-0 bg-transparent text-danger p-2" do %>
+            <i class="bi bi-box-arrow-right"></i> Sign Out
+          <% end %>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <div class="top-bar">
+          <div class="breadcrumb-brand">
+            Portal / <%= content_for(:title) || "Dashboard" %>
+          </div>
+          <div class="text-muted small">
+            <%= Time.current.strftime("%A, %d %B %Y") %>
+          </div>
+        </div>
+        <%= yield %>
+      </main>
+    <% else %>
+      <%= yield %>
+    <% end %>
   </body>
 </html>

@@ -1,49 +1,48 @@
-<div class="container mt-5">
-  <div class="row mb-4 align-items-center">
-    <div class="col">
-      <h1 class="mb-0">Admin Dashboard</h1>
-      <p class="lead text-muted mb-0">Welcome, <%= current_user.full_name %></p>
-    </div>
-    <div class="col-auto">
-      <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger" %>
-    </div>
+<% content_for :title, "Admin Dashboard" %>
+
+<div class="row g-4">
+  <div class="col-md-4">
+    <%= link_to admin_distributors_path, class: "text-decoration-none" do %>
+      <div class="card-premium">
+        <div class="card-icon">
+          <i class="bi bi-people-fill"></i>
+        </div>
+        <h4 class="fw-bold text-dark">Distributors</h4>
+        <p class="text-muted small">Manage global accounts, currencies, and regional logistics profiles.</p>
+        <div class="d-flex align-items-center text-brand fw-bold small mt-4">
+          MANAGE DISTRIBUTORS <i class="bi bi-arrow-right ms-2"></i>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
+  <div class="col-md-4">
+    <%= link_to admin_products_path, class: "text-decoration-none" do %>
+      <div class="card-premium">
+        <div class="card-icon">
+          <i class="bi bi-box-seam-fill"></i>
+        </div>
+        <h4 class="fw-bold text-dark">Products</h4>
+        <p class="text-muted small">Maintain the global product catalog and volume specifications.</p>
+        <div class="d-flex align-items-center text-brand fw-bold small mt-4">
+          MANAGE CATALOG <i class="bi bi-arrow-right ms-2"></i>
+        </div>
+      </div>
+    <% end %>
   </div>
 
-  <div class="row g-4">
-    <div class="col-md-4">
-      <div class="card h-100 shadow-sm border-0">
-        <div class="card-body">
-          <h5 class="card-title fw-bold text-primary mb-3">
-            <i class="bi bi-people-fill me-2"></i>Distributors
-          </h5>
-          <p class="card-text text-muted">Manage distributor accounts, set their currencies, and assign geographic product pricing.</p>
-          <%= link_to "Manage Distributors", admin_distributors_path, class: "btn btn-primary w-100 mt-auto" %>
+  <div class="col-md-4">
+    <%= link_to admin_orders_path, class: "text-decoration-none" do %>
+      <div class="card-premium">
+        <div class="card-icon">
+          <i class="bi bi-cart-check-fill"></i>
+        </div>
+        <h4 class="fw-bold text-dark">Global Orders</h4>
+        <p class="text-muted small">Monitor real-time bulk orders and logistics status across all regions.</p>
+        <div class="d-flex align-items-center text-brand fw-bold small mt-4">
+          VIEW ALL ORDERS <i class="bi bi-arrow-right ms-2"></i>
         </div>
       </div>
-    </div>
-    
-    <div class="col-md-4">
-      <div class="card h-100 shadow-sm border-0">
-        <div class="card-body">
-          <h5 class="card-title fw-bold text-success mb-3">
-            <i class="bi bi-box-seam-fill me-2"></i>Products
-          </h5>
-          <p class="card-text text-muted">Create and edit the global Skincare Oil product catalog and volume specifications.</p>
-          <%= link_to "Manage Products", admin_products_path, class: "btn btn-success w-100 mt-auto" %>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="card h-100 shadow-sm border-0 border-start border-4 border-warning">
-        <div class="card-body">
-          <h5 class="card-title fw-bold text-warning mb-3">
-            <i class="bi bi-cart-check-fill me-2"></i>Global Orders
-          </h5>
-          <p class="card-text text-muted">Monitor all bulk orders across all distributors. Review pricing, volumes, and delivery dates.</p>
-          <%= link_to "View All Orders", admin_orders_path, class: "btn btn-warning w-100 mt-auto text-white" %>
-        </div>
-      </div>
-    </div>
+    <% end %>
   </div>
 </div>

@@ -1,91 +1,89 @@
-<div class="container mt-5" style="max-width: 800px;">
-  <div class="mb-4">
-    <%= link_to "&larr; Back to Distributors".html_safe, admin_distributors_path, class: "text-decoration-none text-muted d-block mb-2" %>
-    <h1><%= @distributor.persisted? ? "Edit Distributor" : "New Distributor" %></h1>
-  </div>
+<% content_for :title, @distributor.persisted? ? "Edit Distributor" : "New Distributor" %>
 
-  <div class="card shadow-sm border-0">
-    <div class="card-body p-4">
-      <%= form_with(model: [:admin, @distributor], local: true) do |f| %>
-        <% if @distributor.errors.any? %>
-          <div class="alert alert-danger">
-            <h6 class="alert-heading"><%= pluralize(@distributor.errors.count, "error") %> prohibited this distributor from being saved:</h6>
-            <ul class="mb-0">
-              <% @distributor.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-              <% end %>
-            </ul>
+<div class="mb-5 text-center">
+  <%= link_to "&larr; Back to Distributors".html_safe, admin_distributors_path, class: "text-decoration-none text-muted d-inline-block mb-2 small fw-bold text-uppercase tracking-widest" %>
+  <h1 class="mb-0 brand-title" style="font-size: 3rem;"><%= @distributor.persisted? ? "Edit Distributor" : "New Distributor" %></h1>
+</div>
+
+<div class="card-premium mx-auto" style="max-width: 800px;">
+  <%= form_with(model: [:admin, @distributor], local: true) do |f| %>
+    <% if @distributor.errors.any? %>
+      <div class="alert alert-brand-error">
+        <h6 class="alert-heading fw-bold"><%= pluralize(@distributor.errors.count, "error") %> prohibited this distributor from being saved:</h6>
+        <ul class="mb-0">
+          <% @distributor.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="row g-3">
+      <div class="col-md-8">
+        <%= f.label :name, "Distributor Identity", class: "form-label fw-bold small text-uppercase tracking-widest text-muted" %>
+        <%= f.text_field :name, class: "form-control form-control-brand", placeholder: "e.g., Target Corp" %>
+      </div>
+      <div class="col-md-4">
+        <%= f.label :distributor_code, "Internal Code", class: "form-label fw-bold small text-uppercase tracking-widest text-muted" %>
+        <%= f.text_field :distributor_code, class: "form-control form-control-brand", placeholder: "e.g., US-UK-001" %>
+      </div>
+
+      <div class="col-md-6">
+        <%= f.label :currency, "Default Currency", class: "form-label fw-bold small text-uppercase tracking-widest text-muted" %>
+        <%= f.select :currency, ["USD", "EUR", "GBP", "ZAR", "AUD", "CAD", "JPY", "SEK"], { prompt: "Select currency" }, class: "form-select form-control-brand" %>
+      </div>
+      <div class="col-md-6 d-flex align-items-end mb-2">
+        <div class="form-check form-switch mt-2">
+          <%= f.check_box :active, class: "form-check-input", role: "switch" %>
+          <%= f.label :active, "Active Account", class: "form-check-label fw-bold ms-2" %>
+        </div>
+      </div>
+
+      <hr class="my-4" style="opacity: 0.1;">
+
+      <h5 class="mb-3 fw-bold">Logistics & Billing</h5>
+      <div class="col-md-6">
+        <%= f.label :tax_number, "Tax / VAT Number", class: "form-label fw-bold small text-uppercase tracking-widest text-muted" %>
+        <%= f.text_field :tax_number, class: "form-control form-control-brand", placeholder: "e.g., VAT1234567" %>
+      </div>
+      <div class="col-md-12">
+        <%= f.label :address, "Physical Office Address", class: "form-label fw-bold small text-uppercase tracking-widest text-muted" %>
+        <%= f.text_area :address, rows: 3, class: "form-control form-control-brand", placeholder: "Enter complete billing and shipping address..." %>
+      </div>
+
+      <hr class="my-4" style="opacity: 0.1;">
+
+      <h5 class="mb-3 fw-bold">Account Manager / Primary User</h5>
+      <%= f.fields_for :users do |user_form| %>
+        <div class="col-md-6">
+          <%= user_form.label :first_name, class: "form-label fw-bold small text-uppercase tracking-widest text-muted" %>
+          <%= user_form.text_field :first_name, class: "form-control form-control-brand", placeholder: "First Name" %>
+        </div>
+        <div class="col-md-6">
+          <%= user_form.label :last_name, class: "form-label fw-bold small text-uppercase tracking-widest text-muted" %>
+          <%= user_form.text_field :last_name, class: "form-control form-control-brand", placeholder: "Last Name" %>
+        </div>
+        <div class="col-md-6">
+          <%= user_form.label :username, class: "form-label fw-bold small text-uppercase tracking-widest text-muted" %>
+          <%= user_form.text_field :username, class: "form-control form-control-brand", placeholder: "Logistics Username" %>
+        </div>
+        <div class="col-md-6">
+          <%= user_form.label :email, class: "form-label fw-bold small text-uppercase tracking-widest text-muted" %>
+          <%= user_form.email_field :email, class: "form-control form-control-brand", placeholder: "user@example.com" %>
+        </div>
+        
+        <% unless @distributor.persisted? %>
+          <div class="col-md-12">
+            <%= user_form.label :password, class: "form-label fw-bold small text-uppercase tracking-widest text-muted" %>
+            <%= user_form.password_field :password, class: "form-control form-control-brand", placeholder: "Minimum 6 characters" %>
           </div>
         <% end %>
-
-        <div class="row g-3">
-          <div class="col-md-8">
-            <%= f.label :name, "Distributor Identity", class: "form-label fw-bold" %>
-            <%= f.text_field :name, class: "form-control", placeholder: "e.g., Target Corp" %>
-          </div>
-          <div class="col-md-4">
-            <%= f.label :distributor_code, "Internal Code", class: "form-label fw-bold" %>
-            <%= f.text_field :distributor_code, class: "form-control", placeholder: "e.g., US-UK-001" %>
-          </div>
-
-          <div class="col-md-6">
-            <%= f.label :currency, "Default Currency", class: "form-label fw-bold" %>
-            <%= f.select :currency, ["USD", "EUR", "GBP", "ZAR", "AUD", "CAD", "JPY"], { prompt: "Select currency" }, class: "form-select" %>
-          </div>
-          <div class="col-md-6 d-flex align-items-end mb-2">
-            <div class="form-check form-switch mt-2">
-              <%= f.check_box :active, class: "form-check-input", role: "switch" %>
-              <%= f.label :active, "Active Account", class: "form-check-label fw-bold" %>
-            </div>
-          </div>
-
-          <hr class="my-4">
-
-          <h5 class="mb-3">Logistics & Billing</h5>
-          <div class="col-md-6">
-            <%= f.label :tax_number, "Tax / VAT Number", class: "form-label fw-bold" %>
-            <%= f.text_field :tax_number, class: "form-control", placeholder: "e.g., VAT1234567" %>
-          </div>
-          <div class="col-md-12">
-            <%= f.label :address, "Physical Office Address", class: "form-label fw-bold" %>
-            <%= f.text_area :address, rows: 3, class: "form-control", placeholder: "Enter complete billing and shipping address..." %>
-          </div>
-
-          <hr class="my-4">
-
-          <h5 class="mb-3">Account Manager / Primary User</h5>
-          <%= f.fields_for :users do |user_form| %>
-            <div class="col-md-6">
-              <%= user_form.label :first_name, class: "form-label fw-bold" %>
-              <%= user_form.text_field :first_name, class: "form-control", placeholder: "First Name" %>
-            </div>
-            <div class="col-md-6">
-              <%= user_form.label :last_name, class: "form-label fw-bold" %>
-              <%= user_form.text_field :last_name, class: "form-control", placeholder: "Last Name" %>
-            </div>
-            <div class="col-md-6">
-              <%= user_form.label :username, class: "form-label fw-bold" %>
-              <%= user_form.text_field :username, class: "form-control", placeholder: "Logistics Username" %>
-            </div>
-            <div class="col-md-6">
-              <%= user_form.label :email, class: "form-label fw-bold" %>
-              <%= user_form.email_field :email, class: "form-control", placeholder: "user@example.com" %>
-            </div>
-            
-            <% unless @distributor.persisted? %>
-              <div class="col-md-12">
-                <%= user_form.label :password, class: "form-label fw-bold" %>
-                <%= user_form.password_field :password, class: "form-control", placeholder: "Minimum 6 characters" %>
-              </div>
-            <% end %>
-            <%= user_form.hidden_field :role, value: "distributor" %>
-          <% end %>
-        </div>
-
-        <div class="d-grid mt-5">
-          <%= f.submit (@distributor.persisted? ? "Update Distributor Account" : "Create Distributor Account"), class: "btn b-brand btn-lg text-white", style: "background-color: #FF5100" %>
-        </div>
+        <%= user_form.hidden_field :role, value: "distributor" %>
       <% end %>
     </div>
-  </div>
+
+    <div class="d-grid mt-5">
+      <%= f.submit (@distributor.persisted? ? "Update Distributor Account" : "Create Distributor Account"), class: "btn btn-brand btn-lg" %>
+    </div>
+  <% end %>
 </div>

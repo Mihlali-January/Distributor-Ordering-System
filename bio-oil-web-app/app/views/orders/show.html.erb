@@ -1,63 +1,67 @@
-<div class="container mt-5" style="max-width: 900px;">
-  <div class="mb-4 d-flex justify-content-between align-items-end">
+<% content_for :title, "Order #{@order.order_number}" %>
+
+<div style="max-width: 1200px;">
+  <div class="mb-4">
+    <%= link_to "&larr; Back to Order History".html_safe, orders_path, class: "text-decoration-none text-muted mb-2 d-block small fw-bold text-uppercase tracking-widest" %>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-      <%= link_to "&larr; Back to Order History".html_safe, orders_path, class: "text-decoration-none text-muted mb-2 d-block" %>
-      <h1>Order <%= @order.order_number %></h1>
-      <p class="text-muted mb-0">Placed by <%= @order.user.email %> on <%= @order.created_at.strftime("%B %d, %Y") %></p>
+      <h1 class="mb-0 brand-title" style="font-size: 3rem;">Order <%= @order.order_number %></h1>
+      <p class="text-muted mt-2">Placed by <strong><%= @order.user.email %></strong> on <%= @order.created_at.strftime("%B %d, %Y") %></p>
     </div>
     <div class="text-end">
-      <div class="badge bg-success fs-6 mb-2">Confirmed</div>
-      <div class="text-muted small">Required Delivery: <strong><%= @order.required_delivery_date.strftime("%B %d, %Y") %></strong></div>
+      <div class="badge bg-brand-light text-brand px-4 py-2 rounded-pill border border-brand-subtle fw-bold mb-2 shadow-sm">Confirmed</div>
+      <div class="text-muted small text-uppercase tracking-widest fw-bold">Delivery: <%= @order.required_delivery_date.strftime("%B %d, %Y") %></div>
     </div>
   </div>
 
-  <div class="card shadow-sm border-0 mb-4">
-    <div class="card-header bg-white py-3 border-bottom-0">
-      <h5 class="mb-0 fw-bold text-secondary">Items Summary</h5>
-    </div>
-    <div class="card-body p-0">
-      <table class="table mb-0">
-        <thead class="table-light">
+  <div class="table-clean shadow-sm mb-4">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>SKU / Product</th>
+          <th class="text-center">Pallets</th>
+          <th class="text-center">Total Units</th>
+          <th class="text-end">Line Cost (<%= @order.distributor.currency %>)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order.order_items.each do |item| %>
           <tr>
-            <th>SKU / Product</th>
-            <th class="text-center">Pallets</th>
-            <th class="text-center">Total Units</th>
-            <th class="text-end">Line Cost (<%= @order.distributor.currency %>)</th>
+            <td class="align-middle">
+              <div class="fw-bold text-brand"><%= item.sku.sku_code %></div>
+              <div class="small text-muted"><%= item.sku.product.name %> (<%= item.sku.product.volume %>)</div>
+            </td>
+            <td class="text-center align-middle fw-bold h5 mb-0"><%= item.pallets %></td>
+            <td class="text-center align-middle text-muted"><%= number_with_delimiter(item.units) %> units</td>
+            <td class="text-end align-middle fw-bold text-dark h6 mb-0">
+              <%= number_to_currency(item.cost, unit: @order.distributor.currency + " ", precision: 2) %>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          <% @order.order_items.each do |item| %>
-            <tr>
-              <td class="align-middle">
-                <div class="fw-bold"><%= item.sku.sku_code %></div>
-                <div class="small text-muted"><%= item.sku.product.name %> (<%= item.sku.product.volume %>)</div>
-              </td>
-              <td class="text-center align-middle"><%= item.pallets %></td>
-              <td class="text-center align-middle text-muted"><%= number_with_delimiter(item.units) %></td>
-              <td class="text-end align-middle fw-medium">
-                <%= number_to_currency(item.cost, unit: @order.distributor.currency + " ") %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-        <tfoot class="table-light">
-          <tr>
-            <th colspan="3" class="text-end py-3">Total Order Cost</th>
-            <th class="text-end py-3 text-primary h4 mb-0">
-              <%= number_to_currency(@order.total_cost, unit: @order.distributor.currency + " ") %>
-            </th>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
+        <% end %>
+      </tbody>
+      <tfoot style="background-color: #fdfdfd; border-top: 2px solid #FF5100;">
+        <tr>
+          <th colspan="3" class="text-end py-4 text-uppercase tracking-widest fw-bold text-muted">Total Order Value</th>
+          <th class="text-end py-4 text-brand h2 mb-0 pe-4">
+            <%= number_to_currency(@order.total_cost, unit: @order.distributor.currency + " ", precision: 2) %>
+          </th>
+        </tr>
+      </tfoot>
+    </table>
   </div>
 
-  <div class="alert alert-info border-0 shadow-sm d-flex align-items-center">
-    <div class="me-3">
-      <i class="bi bi-info-circle-fill fs-4"></i>
+  <div class="card-premium border-0 shadow-sm d-flex align-items-center bg-brand-light">
+    <div class="me-4 text-brand">
+      <i class="bi bi-info-circle-fill fs-2"></i>
     </div>
     <div>
-      <strong>Note:</strong> This order has been logged into the Union Swiss global tracking system. You will receive an email once shipment is scheduled.
+      <h6 class="fw-bold mb-1 text-dark text-uppercase tracking-widest">Global Logistics Sync</h6>
+      <p class="mb-0 text-muted small">
+        This order has been successfully logged into the Union Swiss global fulfillment engine. 
+        Track your shipment status via the <span class="text-brand fw-bold">Bio-Oil Logistics App</span> once scheduled.
+      </p>
     </div>
   </div>
 </div>

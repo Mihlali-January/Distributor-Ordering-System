@@ -12,8 +12,8 @@ User.create!(
   username: "biooiladmin",
   first_name: "Head",
   last_name: "Office",
-  password: "headOffice1234",
-  password_confirmation: "headOffice1234",
+  password: "testing.1234",
+  password_confirmation: "testing.1234",
   role: :admin
 )
 
@@ -22,8 +22,8 @@ User.create!(
   username: "craig",
   first_name: "Craig",
   last_name: "Vosloo",
-  password: "Letsinnovate1234",
-  password_confirmation: "Letsinnovate1234",
+  password: "testing.1234",
+  password_confirmation: "testing.1234",
   role: :admin
 )
 
@@ -32,8 +32,8 @@ User.create!(
   username: "lisamihlali",
   first_name: "Lisakanya",
   last_name: "January",
-  password: "Letsinnovate1234",
-  password_confirmation: "Letsinnovate1234",
+  password: "Password.1234",
+  password_confirmation: "Password.1234",
   role: :admin
 )
 
@@ -59,12 +59,12 @@ dist_sa = Distributor.create!(
 )
 
 User.create!(
-  email: "distr0@example.com",
+  email: "distr0@domain.com",
   username: "distr0",
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
-  password: "letsinnovate",
-  password_confirmation: "letsinnovate",
+  password: "testing.1234",
+  password_confirmation: "testing.1234",
   role: :distributor,
   distributor: dist_sa
 )
@@ -83,12 +83,12 @@ dist_uk = Distributor.create!(
 )
 
 User.create!(
-  email: "distributor_uk@example.com",
+  email: "distributor_uk@domain.com",
   username: "uk_distro",
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
-  password: "distr0UK1234",
-  password_confirmation: "distr0UK1234",
+  password: "testing.1234",
+  password_confirmation: "testing.1234",
   role: :distributor,
   distributor: dist_uk
 )
@@ -107,12 +107,12 @@ dist_se = Distributor.create!(
 )
 
 User.create!(
-  email: "nordic_distro@example.com",
-  username: "nordic_ops",
+  email: "#{Faker::Internet.email}",
+  username: "#{Faker::Name.first_name}007",
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
-  password: "nordicPass1234",
-  password_confirmation: "nordicPass1234",
+  password: "testing.1234",
+  password_confirmation: "testing.1234",
   role: :distributor,
   distributor: dist_se
 )

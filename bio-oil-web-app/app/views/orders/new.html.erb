@@ -1,14 +1,16 @@
-<div class="container mt-5" style="max-width: 900px;">
-  <div class="mb-4">
-    <%= link_to "&larr; Back to Orders".html_safe, orders_path, class: "text-decoration-none text-muted mb-2 d-block" %>
-    <h1>New Order</h1>
-    <p class="text-muted">Place a bulk order for <%= current_user.distributor.name %></p>
-  </div>
+<% content_for :title, "Place New Order" %>
 
+<div class="mb-5 text-center">
+  <%= link_to "&larr; Back to Orders".html_safe, orders_path, class: "text-decoration-none text-muted mb-2 d-inline-block small fw-bold text-uppercase tracking-widest" %>
+  <h1 class="mb-0 brand-title" style="font-size: 3rem;">New Order</h1>
+  <p class="text-muted mt-2">Place a bulk order for <strong><%= current_user.distributor.name %></strong></p>
+</div>
+
+<div class="mx-auto" style="max-width: 900px;">
   <%= form_with(model: @order, local: true, data: { controller: "order-calculator" }) do |f| %>
     <% if @order.errors.any? %>
-      <div class="alert alert-danger mb-4">
-        <h6 class="alert-heading"><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h6>
+      <div class="alert alert-brand-error mb-4">
+        <h6 class="alert-heading fw-bold"><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h6>
         <ul class="mb-0">
           <% @order.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
@@ -17,77 +19,69 @@
       </div>
     <% end %>
 
-    <div class="card shadow-sm border-0 mb-4">
-      <div class="card-header bg-white py-3 border-bottom-0">
-        <h5 class="mb-0 fw-bold text-secondary">General Details</h5>
-      </div>
-      <div class="card-body">
-        <div class="mb-3">
-          <%= f.label :required_delivery_date, "Required Delivery Date", class: "form-label fw-bold" %>
-          <%= f.date_field :required_delivery_date, class: "form-control", min: Date.today.to_s %>
-          <div class="form-text">All orders require a delivery date in the future.</div>
-        </div>
+    <div class="card-premium mb-4">
+      <h5 class="mb-4 fw-bold">General Details</h5>
+      <div class="mb-2">
+        <%= f.label :required_delivery_date, "Required Delivery Date", class: "form-label fw-bold small text-uppercase tracking-widest text-muted" %>
+        <%= f.date_field :required_delivery_date, class: "form-control form-control-brand", min: Date.today.to_s %>
+        <div class="form-text small mt-2">All orders require a delivery date in the future.</div>
       </div>
     </div>
 
-    <div class="card shadow-sm border-0 mb-4">
-      <div class="card-header bg-white py-3 border-bottom-0">
-        <h5 class="mb-0 fw-bold text-secondary">Order Items</h5>
-      </div>
-      <div class="card-body p-0">
-        <table class="table table-hover mb-0">
-          <thead class="table-light">
-            <tr>
-              <th>SKU / Product</th>
-              <th style="width: 150px;">Pallets</th>
-              <th style="width: 150px;">Units</th>
-              <th class="text-end" style="width: 200px;">Line Cost (<%= current_user.distributor.currency %>)</th>
+    <h5 class="mb-3 mt-5 fw-bold">Order Items</h5>
+    <div class="table-clean shadow-sm mb-4">
+      <table class="table mb-0">
+        <thead>
+          <tr>
+            <th>SKU / Product</th>
+            <th style="width: 150px;">Pallets</th>
+            <th style="width: 150px;">Units</th>
+            <th class="text-end" style="width: 200px;">Line Cost (<%= current_user.distributor.currency %>)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @skus.each do |sku| %>
+            <tr class="sku-row" 
+                data-sku-price="<%= sku.price_per_unit %>" 
+                data-sku-id="<%= sku.id %>">
+              <td class="align-middle">
+                <div class="fw-bold text-brand"><%= sku.sku_code %></div>
+                <div class="small text-muted"><%= sku.product.name %> (<%= sku.product.volume %>)</div>
+                <div class="small fw-medium mt-1"><%= number_to_currency(sku.price_per_unit, unit: current_user.distributor.currency + " ") %> / unit</div>
+                
+                <%# Hidden checkbox to indicate this SKU is being sent if pallets > 0 %>
+                <input type="hidden" name="order[order_items_attributes][<%= sku.id %>][sku_id]" value="<%= sku.id %>">
+              </td>
+              <td class="align-middle">
+                <input type="number" 
+                       name="order[order_items_attributes][<%= sku.id %>][pallets]" 
+                       class="form-control form-control-brand pallet-input" 
+                       min="0" 
+                       value="0"
+                       data-action="input->order-calculator#recalculateRow">
+              </td>
+              <td class="align-middle">
+                <span class="unit-total text-muted">0</span>
+              </td>
+              <td class="text-end align-middle fw-bold">
+                <span class="row-cost">0.00</span>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            <% @skus.each do |sku| %>
-              <tr class="sku-row" 
-                  data-sku-price="<%= sku.price_per_unit %>" 
-                  data-sku-id="<%= sku.id %>">
-                <td class="align-middle">
-                  <div class="fw-bold"><%= sku.sku_code %></div>
-                  <div class="small text-muted"><%= sku.product.name %> (<%= sku.product.volume %>)</div>
-                  <div class="small text-primary"><%= number_to_currency(sku.price_per_unit, unit: current_user.distributor.currency + " ") %> / unit</div>
-                  
-                  <%# Hidden checkbox to indicate this SKU is being sent if pallets > 0 %>
-                  <input type="hidden" name="order[order_items_attributes][<%= sku.id %>][sku_id]" value="<%= sku.id %>">
-                </td>
-                <td class="align-middle">
-                  <input type="number" 
-                         name="order[order_items_attributes][<%= sku.id %>][pallets]" 
-                         class="form-control pallet-input" 
-                         min="0" 
-                         value="0"
-                         data-action="input->order-calculator#recalculateRow">
-                </td>
-                <td class="align-middle">
-                  <span class="unit-total text-muted">0</span>
-                </td>
-                <td class="text-end align-middle fw-bold">
-                  <span class="row-cost">0.00</span>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-          <tfoot class="table-light">
-            <tr>
-              <th colspan="3" class="text-end py-3">Grand Total (<%= current_user.distributor.currency %>)</th>
-              <th class="text-end py-3 text-primary h4 mb-0">
-                <span data-order-calculator-target="grandTotal">0.00</span>
-              </th>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
+          <% end %>
+        </tbody>
+        <tfoot style="background-color: #fdfdfd; border-top: 1px solid rgba(0,0,0,0.05);">
+          <tr>
+            <th colspan="3" class="text-end py-4 fw-bold text-uppercase tracking-widest">Grand Total (<%= current_user.distributor.currency %>)</th>
+            <th class="text-end py-4 text-brand h4 mb-0 pe-4">
+              <span data-order-calculator-target="grandTotal">0.00</span>
+            </th>
+          </tr>
+        </tfoot>
+      </table>
     </div>
 
-    <div class="d-grid mb-5">
-      <%= f.submit "Place Order", class: "btn btn-primary btn-lg shadow-sm" %>
+    <div class="d-grid mt-5 mb-5">
+      <%= f.submit "Place Order", class: "btn btn-brand btn-lg shadow-sm" %>
     </div>
   <% end %>
 </div>
