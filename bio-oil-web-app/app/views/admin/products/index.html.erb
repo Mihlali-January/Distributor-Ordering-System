@@ -21,7 +21,7 @@
       <tbody>
         <% @products.each do |product| %>
           <tr>
-            <td class="fw-bold text-dark"><%= product.name %></td>
+            <td class="fw-bold"><%= link_to product.name, admin_product_path(product), class: "text-brand text-decoration-none" %></td>
             <td><%= product.volume %></td>
             <td class="text-center">
               <span class="badge bg-light text-dark border fw-bold px-3 py-2 rounded-pill shadow-sm">
@@ -29,6 +29,7 @@
               </span>
             </td>
             <td class="text-end">
+              <%= link_to "View", admin_product_path(product), class: "btn btn-sm btn-brand-light ms-1 rounded-pill px-4" %>
               <%= link_to "Edit", edit_admin_product_path(product), class: "btn btn-sm btn-outline-dark ms-1 rounded-pill px-4" %>
             </td>
           </tr>

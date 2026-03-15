@@ -1,2 +1,125 @@
-<h1>Admin::Products#show</h1>
-<p>Find me in app/views/admin/products/show.html.erb</p>
+<% content_for :title, @product.name %>
+
+<div style="max-width: 1200px;">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <%= link_to "&larr; Back to Catalog".html_safe, admin_products_path, class: "text-decoration-none text-muted mb-2 d-block small fw-bold text-uppercase tracking-widest" %>
+      <h1 class="mb-0 brand-title"><%= @product.name %></h1>
+      <div class="mt-2 d-flex align-items-center">
+        <span class="text-muted small text-uppercase tracking-widest fw-bold me-2">Classification:</span>
+        <span class="badge bg-light text-brand border me-3 fw-bold">Skincare</span>
+        <span class="text-muted small text-uppercase tracking-widest fw-bold me-2">Volume:</span>
+        <span class="badge bg-brand-light text-brand px-3 rounded-pill fw-bold"><%= @product.volume %></span>
+      </div>
+    </div>
+    <div class="d-flex gap-2">
+      <%= link_to "Edit Product", edit_admin_product_path(@product), class: "btn btn-outline-dark rounded-pill px-4 shadow-sm" %>
+      <%= button_to "Delete", admin_product_path(@product), method: :delete, data: { confirm: "Are you sure? This will delete all associated regional SKUs." }, class: "btn btn-outline-danger rounded-pill px-4 shadow-sm" %>
+    </div>
+  </div>
+
+  <div class="row g-4 mt-2">
+    <div class="col-md-7">
+      <div class="card-premium h-100">
+        <h5 class="fw-bold mb-4 brand-title">Product Specifications</h5>
+        
+        <div class="row mb-4">
+          <div class="col-sm-4 text-muted small text-uppercase tracking-widest fw-bold">Commercial Name</div>
+          <div class="col-sm-8 text-dark fw-bold h5 mb-0"><%= @product.name %></div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-sm-4 text-muted small text-uppercase tracking-widest fw-bold">Standard Volume</div>
+          <div class="col-sm-8 text-dark fw-medium"><%= @product.volume %></div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-sm-4 text-muted small text-uppercase tracking-widest fw-bold">Description</div>
+          <div class="col-sm-8 text-muted italic">
+            High-performance skincare formulation. Designed for global distribution in accordance with regional compliance standards.
+          </div>
+        </div>
+
+        <div class="row mb-0">
+          <div class="col-sm-4 text-muted small text-uppercase tracking-widest fw-bold">Global Identifier</div>
+          <div class="col-sm-8">
+            <code class="text-brand bg-light p-1 px-2 rounded border">BIO-<%= @product.name.split.map(&:first).join.upcase %>-<%= @product.volume.gsub(/[^0-9]/, "") %></code>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-5">
+      <div class="card-premium h-100 border-top border-4 border-brand">
+        <h5 class="fw-bold mb-4 brand-title">Market Intelligence</h5>
+        
+        <div class="mb-4">
+          <p class="text-muted small text-uppercase tracking-widest mb-2 font-weight-bold">Active Regional Markets</p>
+          <div class="d-flex align-items-baseline">
+            <span class="display-4 fw-bold text-dark"><%= @product.skus.count %></span>
+            <span class="ms-2 text-muted fw-medium">Regions</span>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <p class="text-muted small text-uppercase tracking-widest mb-2 font-weight-bold">Last Updated</p>
+          <div class="text-dark fw-medium">
+            <%= @product.updated_at.strftime("%B %d, %Y") %>
+          </div>
+        </div>
+
+        <div class="bg-light p-3 rounded border text-center">
+            <p class="text-muted small mb-0">Unique distributors registered for this product volume.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4 mt-2">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center mb-3 mt-4">
+        <h5 class="fw-bold mb-0 brand-title">Regional Pricing (SKUs)</h5>
+        <span class="badge bg-light text-muted border px-3"><%= @product.skus.count %> Records</span>
+      </div>
+      
+      <div class="table-clean shadow-sm">
+        <table class="table mb-0 align-middle">
+          <thead>
+            <tr>
+              <th>Distributor / Region</th>
+              <th>SKU Code</th>
+              <th class="text-end">Price Per Unit</th>
+              <th class="text-center">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if @product.skus.any? %>
+              <% @product.skus.each do |sku| %>
+                <tr>
+                  <td>
+                    <div class="fw-bold text-dark"><%= sku.distributor.name %></div>
+                    <div class="text-muted small">ID: <%= sku.distributor.distributor_code %></div>
+                  </td>
+                  <td><code class="text-brand border px-2 py-1 rounded bg-light"><%= sku.sku_code %></code></td>
+                  <td class="text-end fw-bold">
+                    <%= number_to_currency(sku.price_per_unit, unit: "#{sku.distributor.currency} ") %>
+                  </td>
+                  <td class="text-center">
+                    <span class="badge bg-success-subtle text-success border border-success-subtle px-3 rounded-pill">Active</span>
+                  </td>
+                </tr>
+              <% end %>
+            <% else %>
+              <tr>
+                <td colspan="4" class="text-center py-5 text-muted">
+                  <div class="mb-2 h5">No regional SKUs defined</div>
+                  <p class="small mb-0">Assign this product to a distributor to establish regional pricing.</p>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

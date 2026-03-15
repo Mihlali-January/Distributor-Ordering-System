@@ -40,7 +40,7 @@ class Admin::ProductsController < Admin::BaseController
   private
 
   def set_product
-    @product = Product.find(params[:id])
+    @product = Product.includes(skus: :distributor).find(params[:id])
   end
 
   def product_params
