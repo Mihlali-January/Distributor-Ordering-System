@@ -45,6 +45,7 @@ prod_125ml = Product.create!(name: "Skincare Oil 125ml", volume: "125ml (4.2 oz)
 prod_200ml = Product.create!(name: "Skincare Oil 200ml", volume: "200ml (6.7 oz)", description: description)
 
 puts "Creating Distributors & Distributor Users..."
+# Faker company data(Ruby Gem )
 
 # SOUTH AFRICA
 dist_sa = Distributor.create!(
@@ -132,12 +133,14 @@ Sku.create!(product: prod_125ml, distributor: dist_uk, price_per_unit: 15.00)
 Sku.create!(product: prod_200ml, distributor: dist_uk, price_per_unit: 20.00)
 
 # Sweden Pricing (SEK)
-Sku.create!(product: prod_25ml, distributor: dist_se, price_per_unit: 50.00)
-Sku.create!(product: prod_60ml, distributor: dist_se, price_per_unit: 100.00)
-Sku.create!(product: prod_125ml, distributor: dist_se, price_per_unit: 150.00)
-Sku.create!(product: prod_200ml, distributor: dist_se, price_per_unit: 250.00)
+Sku.create!(product: prod_25ml, distributor: dist_se, price_per_unit: 28.00)
+Sku.create!(product: prod_60ml, distributor: dist_se, price_per_unit: 56.00)
+Sku.create!(product: prod_125ml, distributor: dist_se, price_per_unit: 84.00)
+Sku.create!(product: prod_200ml, distributor: dist_se, price_per_unit: 140.00)
 
-puts "Creating Mock Orders..."
+puts "Creating Orders..."
+# This is seed data; for the DEMO ( having an example of what it would look)
+# Three orders that are there to genreate the data
 
 # SA ORDER 1
 order_sa = Order.create!(
@@ -168,4 +171,4 @@ order_se.order_items.create!(sku: dist_se.skus.find_by(product: prod_25ml), pall
 order_se.order_items.create!(sku: dist_se.skus.find_by(product: prod_60ml), pallets: 8)
 order_se.save!
 
-puts "Seed data successfully created!"
+puts "Seed data successfully created..."

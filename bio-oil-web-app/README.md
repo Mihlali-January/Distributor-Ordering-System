@@ -1,8 +1,7 @@
 # Bio-Oil Distributor Ordering System
-This is a  web-based ordering system that allows distributors to place orders for Bio-Oil products and enables Union Swiss administrators to configure distributors and their pricing by Mihlali Lisakanya January.
+This is a  web-based ordering system that allows distributors to place orders for Bio-Oil products and enables Union Swiss administrators to configure distributors and their pricing.  
 
 ## Setup Instructions
-
 - **Ruby/Rails version**: Ruby 3.3.6 / Rails 8.0.1
 - **Dependencies**: Run `bundle install` and `yarn install`
 - **Database**: Run `bin/rails db:prepare` (creates, migrates, and seeds). For a clean rebuild, use `bin/rails db:reset`.
@@ -12,15 +11,14 @@ This is a  web-based ordering system that allows distributors to place orders fo
 
 1. Navigate to the `bio-oil-web-app` directory:
 
-   ```run in wsl(ubuntu)
-   cd bio-oil-web-app
-   ```
+   -run in wsl(ubuntu)
+   -cd bio-oil-web-app
+   
 
 2. Start the application:
 
-   ```run in wsl(ubuntu)
+   run in wsl(ubuntu)
    rails server
-   ```
 
 3. Access the application at [http://127.0.0.1:3000](http://127.0.0.1:3000).
 
@@ -55,10 +53,12 @@ This is a  web-based ordering system that allows distributors to place orders fo
 - **Username**: `craig@unionswiss.com`
 - **Password**: `testing.1234`
 
-### Distributor
+### Distributors
 
-- **Username**: `distributor_sa@example.com`
-- **Password**: `distr0SA1234`
+- **Username**: `distr0@domain.com`
+- **Password**: `testing.1234`
 
-- **Username**: `distributor_uk@example.com`
-- **Password**: `distr0UK1234`
+- **Username**: `distributor_uk@domain.com`
+- **Password**: `testing.1234'
+
+
