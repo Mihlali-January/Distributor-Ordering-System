@@ -31,10 +31,6 @@ This is a  web-based ordering system that allows distributors to place orders fo
 - `rails server`: Starts the local development server.
 - `Ctrl + C`: Stops the running server.
 
-### CSS & Styling
-
-- `npm run build:css`: Compiles SCSS files and applies vendor prefixing. Run this if/when style changes aren't appearing.
-- `npm run watch:css`: Automatically rebuilds CSS whenever a `.scss` file is saved.
 
 ### Database Management
 
