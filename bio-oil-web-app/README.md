@@ -51,10 +51,10 @@ A web-based ordering system that allows distributors to place orders for Bio-Oil
 ### Admin
 
 - **Username**: `admin@unionswiss.com`
-- **Password**: `headOffice1234`
+- **Password**: `testing.1234`
 
 - **Username**: `craig@unionswiss.com`
-- **Password**: `Letsinnovate1234`
+- **Password**: `testing.1234`
 
 ### Distributor
 
@@ -63,12 +63,3 @@ A web-based ordering system that allows distributors to place orders for Bio-Oil
 
 - **Username**: `distributor_uk@example.com`
 - **Password**: `distr0UK1234`
-
-## Project Status & Roadmap
-
-### Key Features Implemented
-
-- [x] Premium Authentication UI (Glassmorphism & Branded photography)
-- [x] Secure Login/Password recovery (Paranoid Mode enabled)
-- [x] Admin-led User & Distributor creation
-- [x] Role-based access control (Admin vs. Distributor)
