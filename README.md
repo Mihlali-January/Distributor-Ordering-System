@@ -64,20 +64,4 @@ A web-based ordering system that allows distributors to place orders for Bio-Oil
 - **Username**: `distributor_uk@example.com`
 - **Password**: `distr0UK1234`
 
-## Project Status & Roadmap
 
-### Key Features Implemented
-
-- [x] Premium Authentication UI (Glassmorphism & Branded photography)
-- [x] Secure Login/Password recovery (Paranoid Mode enabled)
-- [x] Admin-led User & Distributor creation
-- [x] Role-based access control (Admin vs. Distributor)
-
-### Future Features
-
-- [ ] Automated tests (RSpec/Minitest)
-- [ ] Order Management
-- [ ] Order Tracking/Automated Emails
-- [ ] Sales Order Generation
-- [ ] Payment Portal Integration
-- [ ] Delivery Portal Integration
