@@ -3,7 +3,7 @@ This is a  web-based ordering system that allows distributors to place orders fo
 
 ## Setup Instructions
 - **Ruby/Rails version**: Ruby 3.3.6 / Rails 8.0.1
-- **Dependencies**: Run `bundle install` and `yarn install`
+- **Dependencies**: Run `bundle install` and `npm install`
 - **Database**: Run `bin/rails db:prepare` (creates, migrates, and seeds). For a clean rebuild, use `bin/rails db:reset`.
 - **Environment**: Ensure logic for `Admin` console access is configured in development.
 
