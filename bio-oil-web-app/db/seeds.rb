@@ -16,7 +16,7 @@ User.create!(
   password_confirmation: "testing.1234",
   role: :admin
 )
-
+# This
 User.create!(
   email: "craig@unionswiss.com",
   username: "craig",
@@ -109,7 +109,7 @@ dist_se = Distributor.create!(
 )
 
 User.create!(
-  email: "#{Faker::Internet.email}",
+  email: "#distributor_se@domain.com",
   username: "#{Faker::Name.first_name}007",
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
