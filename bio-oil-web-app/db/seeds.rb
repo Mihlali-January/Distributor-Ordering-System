@@ -143,32 +143,32 @@ puts "Creating Orders..."
 # Three orders that are there to genreate the data
 
 # SA ORDER 1
-order_sa = Order.create!(
+order_sa = Order.new(
   distributor: dist_sa,
   user: dist_sa.users.first,
   required_delivery_date: 2.weeks.from_now
 )
-order_sa.order_items.create!(sku: dist_sa.skus.find_by(product: prod_25ml), pallets: 30)
-order_sa.order_items.create!(sku: dist_sa.skus.find_by(product: prod_200ml), pallets: 10)
+order_sa.order_items.build(sku: dist_sa.skus.find_by(product: prod_25ml), pallets: 30)
+order_sa.order_items.build(sku: dist_sa.skus.find_by(product: prod_200ml), pallets: 10)
 order_sa.save!
 
 # UK ORDER 1
-order_uk = Order.create!(
+order_uk = Order.new(
   distributor: dist_uk,
   user: dist_uk.users.first,
   required_delivery_date: 3.weeks.from_now
 )
-order_uk.order_items.create!(sku: dist_uk.skus.find_by(product: prod_125ml), pallets: 12)
+order_uk.order_items.build(sku: dist_uk.skus.find_by(product: prod_125ml), pallets: 12)
 order_uk.save!
 
 # SWEDEN ORDER 1
-order_se = Order.create!(
+order_se = Order.new(
   distributor: dist_se,
   user: dist_se.users.first,
   required_delivery_date: 10.days.from_now
 )
-order_se.order_items.create!(sku: dist_se.skus.find_by(product: prod_25ml), pallets: 8)
-order_se.order_items.create!(sku: dist_se.skus.find_by(product: prod_60ml), pallets: 8)
+order_se.order_items.build(sku: dist_se.skus.find_by(product: prod_25ml), pallets: 8)
+order_se.order_items.build(sku: dist_se.skus.find_by(product: prod_60ml), pallets: 8)
 order_se.save!
 
 puts "Seed data successfully created..."
