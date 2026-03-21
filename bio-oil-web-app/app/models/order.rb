@@ -23,6 +23,8 @@ class Order < ApplicationRecord
   end
 
   def calculate_total_cost
+    # Ensure all items have their costs calculated before we sum them up
+    order_items.each(&:calculate_totals)
     self.total_cost = order_items.map { |i| i.cost || 0 }.sum
   end
 

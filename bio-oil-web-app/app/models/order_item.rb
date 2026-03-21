@@ -5,9 +5,6 @@ class OrderItem < ApplicationRecord
   validates :pallets, presence: true, numericality: { greater_than: 0, only_integer: true }
 
   before_save :calculate_totals
-
-  private
-
   def calculate_totals
     return unless pallets.present? && sku.present?
 

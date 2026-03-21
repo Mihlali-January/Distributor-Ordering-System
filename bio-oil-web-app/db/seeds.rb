@@ -61,7 +61,7 @@ dist_sa = Distributor.create!(
 )
 
 User.create!(
-  email: "distr0@domain.com",
+  email: "distributor_sa@domain.com",
   username: "distr0",
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
@@ -109,7 +109,7 @@ dist_se = Distributor.create!(
 )
 
 User.create!(
-  email: "#distributor_se@domain.com",
+  email: "distributor_se@domain.com",
   username: "#{Faker::Name.first_name}007",
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
