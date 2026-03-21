@@ -1,7 +1,7 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
 
-/* 1. Global Brand Variables */
+/*Global Brand Variables */
 $brand-orange: #FF5100;
 $brand-orange-light: rgba(255, 81, 0, 0.1);
 $brand-orange-error: #D94500;
@@ -17,7 +17,7 @@ $glass-blur: 15px;
 .uppercase { text-transform: uppercase; }
 .tracking-widest { letter-spacing: 0.15em; }
 
-/* 2. Hero Component Styles */
+/* Hero Component Styles */
 .brand-display-mega {
   font-size: clamp(4rem, 10vw, 8rem);
   letter-spacing: -0.04em;
@@ -48,7 +48,7 @@ h5.brand-title, .h5.brand-title {
   margin: 0 auto;
 }
 
-/* 3. Navigation Interactions */
+/* Navigation Interactions */
 .nav-link-brand {
   color: $brand-orange;
   text-decoration: none;
@@ -65,7 +65,7 @@ h5.brand-title, .h5.brand-title {
   }
 }
 
-/* 4. Layout & Typography */
+/*Layout & Typography */
 .bio-oil-landing {
   min-height: 100vh;
   display: flex;
@@ -80,7 +80,7 @@ h5.brand-title, .h5.brand-title {
     padding: 100px 0;
   }
 }
-/* 5. Auth Layout Styles */
+/*Auth Layout Styles */
 .auth-layout {
   overflow: hidden;
   font-family: 'Inter', sans-serif;
@@ -241,7 +241,7 @@ h5.brand-title, .h5.brand-title {
   from { transform: translateY(-10px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
-/* 6. Dashboard Design Styling */
+/* Dashboard Design Styling */
 .dashboard-layout {
   display: flex;
   min-height: 100vh;
