@@ -4,7 +4,7 @@
   <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
       <%= link_to "&larr; Back to Distributors".html_safe, admin_distributors_path, class: "text-decoration-none text-muted mb-2 d-block small fw-bold text-uppercase tracking-widest" %>
-      <h1 class="mb-0 brand-title"><%= @distributor.name %></h1>
+      <h1 class="mb-0" style="font-size: 1.75rem; font-weight: 700;"><%= @distributor.name %></h1>
       <div class="mt-2 d-flex align-items-center">
         <span class="text-muted small text-uppercase tracking-widest fw-bold me-2">Code:</span>
         <span class="badge bg-light text-brand border me-3 fw-bold"><%= @distributor.distributor_code %></span>
@@ -18,7 +18,11 @@
     </div>
     <div>
       <%= link_to "Edit Account", edit_admin_distributor_path(@distributor), class: "btn btn-outline-dark rounded-pill px-4 shadow-sm" %>
-      <%= link_to "Manage SKUs", admin_distributor_skus_path(@distributor), class: "btn btn-brand ms-2 shadow-sm" %>
+      <%= link_to "Manage SKUs", admin_distributor_skus_path(@distributor), class: "btn btn-brand ms-2 shadow-sm rounded-pill px-4", style: "text-transform: none; font-size: 0.875rem;" %>
+      <%= button_to "Delete", admin_distributor_path(@distributor),
+          method: :delete,
+          form: { data: { turbo_confirm: "Are you sure you want to delete #{@distributor.name}? This will permanently delete all their users, SKUs and orders." } },
+          class: "btn btn-outline-danger rounded-pill px-4 shadow-sm ms-2" %>
     </div>
   </div>
 

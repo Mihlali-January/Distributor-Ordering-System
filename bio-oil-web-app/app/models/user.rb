@@ -9,7 +9,7 @@ class User < ApplicationRecord
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     if (login = conditions.delete(:login))
-      where(conditions.to_h).where(["lower(username) = :value OR lower(email) = :value", { value: login.downcase }]).first
+      where(conditions.to_h).where([ "lower(username) = :value OR lower(email) = :value", { value: login.downcase } ]).first
     elsif conditions.has_key?(:username) || conditions.has_key?(:email)
       where(conditions.to_h).first
     end
@@ -22,7 +22,7 @@ class User < ApplicationRecord
   validates :role, presence: true
   validates :username, presence: true, uniqueness: true
   validates :first_name, :last_name, presence: true
-  
+
   validate :distributor_presence_for_distributor_role
 
   def full_name
@@ -35,11 +35,11 @@ class User < ApplicationRecord
 
   private
 
-  def distributor_presence_for_distributor_role
-    if distributor? && distributor_id.blank?
-      errors.add(:distributor, "must be present for distributor users")
-    elsif admin? && distributor_id.present?
-      errors.add(:distributor, "must be blank for admin users")
-    end
+ def distributor_presence_for_distributor_role
+  if distributor? && distributor.blank?
+    errors.add(:distributor, "must be present for distributor users")
+  elsif admin? && distributor_id.present?
+    errors.add(:distributor, "must be blank for admin users")
   end
+end
 end
